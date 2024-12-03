@@ -1,0 +1,390 @@
+﻿
+@{
+    ViewBag.Title = "ThongTinCaNhan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = Session["user"] as WebApp.Models.ThongTin;
+    var diaphuong = ViewData["diaphuong"] as List<WebApp.Models.DiaPhuong>;
+}
+
+<div class="app-wrapper flex-column flex-row-fluid pt-1" id="kt_app_wrapper">
+
+    <!--begin::Content-->
+    <div id="kt_app_content" class="app-content mt-5 container">
+        <!--begin::Inbox App - Compose -->
+        <div class="d-flex flex-column flex-lg-row">
+            <!--begin::Sidebar-->
+            <div class="d-none d-lg-flex flex-column flex-lg-row-auto w-100 w-lg-275px"
+                 data-kt-drawer="true" data-kt-drawer-name="inbox-aside"
+                 data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true"
+                 data-kt-drawer-width="225px" data-kt-drawer-direction="start"
+                 data-kt-drawer-toggle="#kt_inbox_aside_toggle">
+                <!--begin::Sticky aside-->
+                <div class="card card-flush mt-lg-0" data-kt-sticky="false" style="margin-top: 40px"
+                     data-kt-sticky-name="inbox-aside-sticky"
+                     data-kt-sticky-offset="{default: false, xl: '100px'}"
+                     data-kt-sticky-width="{lg: '275px'}" data-kt-sticky-left="auto"
+                     data-kt-sticky-top="100px" data-kt-sticky-animation="false" data-kt-sticky-zindex="95">
+                    <!--begin::Aside content-->
+                    <div class="p-1">
+                        <!--begin::Menu-->
+                        <div class="menu menu-column menu-rounded menu-state-bg menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary mb-10">
+                            <!--begin::Menu item-->
+                            <div class="menu-item mb-3 border-bottom">
+                                <!--begin::Inbox-->
+                                <a href="/Home/ThongTinCaNhan" class="menu-link">
+                                    <span class="menu-icon">
+                                        <img class="me-3"
+                                             src="assets/media/custom/icon_user.svg" alt="">
+                                    </span>
+                                    <span class="menu-title fw-bold text-black fs-6">
+                                        Thông tin cá
+                                        nhân
+                                    </span>
+                                </a>
+                                <!--end::Inbox-->
+                            </div>
+                            <!--end::Menu item-->
+                            <!--begin::Menu item-->
+                            <div class="menu-item mb-3 border-bottom">
+                                <!--begin::Inbox-->
+                                <span class="menu-link">
+                                    <span class="menu-icon">
+                                        <i class="ki-outline ki-sms fs-2 me-3"></i>
+                                    </span>
+                                    <span class="menu-title fw-bold fs-6">Inbox</span>
+                                    <span class="badge badge-light-success fs-6">3</span>
+                                </span>
+                                <!--end::Inbox-->
+                            </div>
+                            <!--end::Menu item-->
+                        </div>
+                        <!--end::Menu-->
+                    </div>
+                    <!--end::Aside content-->
+                </div>
+                <!--end::Sticky aside-->
+            </div>
+            <!--end::Sidebar-->
+            <!--begin::Content-->
+            <div class="flex-lg-row-fluid ms-lg-7 ms-xl-10">
+                <!--begin::Card-->
+                <div class="card">
+                    <div class="card-header d-flex align-items-center justify-content-between py-3">
+                        <h2 class="card-title m-0">Chỉnh sửa thông tin cá nhân</h2>
+                        <!--begin::Toggle-->
+                        <a href="#"
+                           class="btn btn-sm btn-icon btn-color-primary btn-light btn-active-light-primary d-lg-none"
+                           data-bs-toggle="tooltip" data-bs-dismiss="click" data-bs-placement="top"
+                           title="Cài đặt" id="kt_inbox_aside_toggle">
+                            <i class="ki-outline ki-abstract-14 fs-3 m-0"></i>
+                        </a>
+                        <!--end::Toggle-->
+                    </div>
+                    <div class="card-body p-0">
+                        <!--begin::Form-->
+                        <div id="kt_inbox_compose_form">
+                            <!--begin::Body-->
+                            <div class="d-block">
+                                <form id="kt_account_profile_details_form" class="form"
+                                      action="/Home/ThongTinCaNhan" method="POST"
+                                      enctype="multipart/form-data">
+                                    <input type="hidden" name="Id"
+                                           value="@user.Id">
+                                    <input type="hidden" name="IdTK"
+                                           value="@user.IdTK">
+                                    <input type="hidden" name="Avatar"
+                                           value="@user.Avatar">
+                                    <!--begin::Card body-->
+                                    <div class="card-body border-top p-9">
+                                        <!--begin::Input group-->
+                                        <div class="row mb-6">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                                Ảnh đại
+                                                diện
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <div class="col-lg-8">
+                                                <!--begin::Image input-->
+                                                <div class="image-input image-input-outline"
+                                                     data-kt-image-input="true"
+                                                     style="background-image: url('assets/media/svg/avatars/blank.svg')">
+                                                    <!--begin::Preview existing avatar-->
+                                                    <div class="image-input-wrapper w-125px h-125px"
+                                                         style="background-image: url(../../Upload/User/@user.Avatar)"></div>
+                                                    <!--end::Preview existing avatar-->
+                                                    <!--begin::Label-->
+                                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                           data-kt-image-input-action="change"
+                                                           data-bs-toggle="tooltip"
+                                                           title="Thay đổi ảnh đại diện">
+                                                        <i class="ki-outline ki-pencil fs-7"></i>
+                                                        <!--begin::Inputs-->
+                                                        <input type="file" name="Avatar"
+                                                               accept=".png, .jpg, .jpeg" />
+                                                        <input type="hidden" name="avatar_remove" />
+                                                        <!--end::Inputs-->
+                                                    </label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Cancel-->
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                          data-kt-image-input-action="cancel"
+                                                          data-bs-toggle="tooltip" title="Hủy ảnh đại diện">
+                                                        <i class="ki-outline ki-cross fs-2"></i>
+                                                    </span>
+                                                    <!--end::Cancel-->
+                                                    <!--begin::Remove-->
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                          data-kt-image-input-action="remove"
+                                                          data-bs-toggle="tooltip" title="Xóa ảnh đại diện">
+                                                        <i class="ki-outline ki-cross fs-2"></i>
+                                                    </span>
+                                                    <!--end::Remove-->
+                                                </div>
+                                                <!--end::Image input-->
+                                                <br>
+                                                <br>
+                                            </div>
+
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="row mb-6">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">
+                                                Họ
+                                                và tên
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <div class="col-lg-8">
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-12 fv-row">
+                                                        <input type="text" name="HoTen"
+                                                               class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                               placeholder="Họ và tên" value="@user.HoTen" />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="row mb-6">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">
+                                                Ngày
+                                                sinh
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <div class="col-lg-8">
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-12 fv-row">
+                                                        <input type="date" name="NgaySinh" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Ngày/Tháng/Năm" value="@user.NgaySinh.Value.ToString("yyyy-MM-dd")" />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="row mb-6">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                                <span class="required">Giới tính</span>
+
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <div class="col-lg-8 fv-row">
+                                                <select name="GioiTinh" aria-label="Select a Country"
+                                                        data-control="select2"
+                                                        data-placeholder="Select a country..."
+                                                        class="form-select form-select-solid form-select-lg fw-semibold">
+                                                    <option value="1" @(user.GioiTinh == 1 ? "selected" : "")>Nam</option>
+                                                    <option value="1" @(user.GioiTinh == 0 ? "selected" : "")>Nữ</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <!--begin::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="row mb-6">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">
+                                                Email
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <div class="col-lg-8">
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-12 fv-row">
+                                                        <input type="text" name="Email"
+                                                               class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                               placeholder="Email" value="@user.Email" />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="row mb-6">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">
+                                                Chứng
+                                                minh nhân
+                                                dân
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <div class="col-lg-8">
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-12 fv-row">
+                                                        <input type="text" name="CMND"
+                                                               class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                               placeholder="Số chứng minh nhân dân" value="@user.CMND" />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <!--end::Input group-->
+                                        <!--begin::Input group-->
+                                        <div class="row mb-6">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">
+                                                Số
+                                                điện thoại
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <div class="col-lg-8">
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-12 fv-row">
+                                                        <input type="text" name="SDT"
+                                                               class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                               placeholder="Số điện thoại" value="@user.SDT" />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row mb-6">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">
+                                                Địa chỉ
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <div class="col-lg-8">
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-12 fv-row">
+                                                        <input type="text" name="DiaChi"
+                                                               class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                               placeholder="Địa chỉ" value="@user.DiaChi" />
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row mb-6">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6">
+                                                Địa phương
+                                            </label>
+                                            <!--end::Label-->
+
+                                            <div class="col-lg-8">
+
+                                                <div class="row">
+
+                                                    <div class="col-lg-12 fv-row">
+                                                        <select class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" name="IdDiaPhuong">
+                                                            @foreach (var item in diaphuong)
+                                                            {
+                                                                <option value="@item.Id" @(user.IdDiaPhuong == item.Id ? "selected" : "")>@item.TenDiaPhuong</option>
+                                                            }
+                                                        </select>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+                                    <!--end::Card body-->
+                                    <!--begin::Actions-->
+                                    <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                        <button type="reset"
+                                                class="btn btn-light btn-active-light-primary me-2">
+                                            Hủy
+                                        </button>
+                                        <button type="submit" class="btn btn-primary"
+                                                id="kt_account_profile_details_submit">
+                                            Lưu
+                                        </button>
+                                    </div>
+                                    <!--end::Actions-->
+                                </form>
+                            </div>
+                            <!--end::Body-->
+                        </div>
+                        <!--end::Form-->
+                    </div>
+                </div>
+                <!--end::Card-->
+            </div>
+            <!--end::Content-->
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+            <script>
+    document.addEventListener("DOMContentLoaded", function () {
+                    flatpickr("#date_of_birth", {
+                        dateFormat: "d/m/Y",
+                        allowInput: true,
+                        locale: "vi",
+                    });
+                });</script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            @if (Request["sc"] == "1")
+            {
+                <script>
+                    Swal.fire("Lỗi thông tin.");
+                </script>
+            }
+        </div>
+        <!--end::Inbox App - Compose -->
+    </div>
+    <!--end::Content-->
+
+</div>

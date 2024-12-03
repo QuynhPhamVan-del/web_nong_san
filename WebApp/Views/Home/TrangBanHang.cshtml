@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "TrangBanHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = Session["user"] as WebApp.Models.ThongTin;
+}
+
+<div id="kt_app_content" class="app-content mt-5 container">
+    <!--begin::Inbox App - Compose -->
+    <div class="d-flex flex-column flex-lg-row">
+
+        <!--begin::Sidebar-->
+        <div class="d-none d-lg-flex flex-column flex-lg-row-auto col-12 col-lg-2" data-kt-drawer="true"
+             data-kt-drawer-name="inbox-aside" data-kt-drawer-activate="{default: true, lg: false}"
+             data-kt-drawer-overlay="true" data-kt-drawer-width="225px" data-kt-drawer-direction="start"
+             data-kt-drawer-toggle="#kt_inbox_aside_toggle">
+            <!--begin::Sticky aside-->
+            <div class="mt-lg-0" data-kt-sticky="false" style="margin-top: 40px"
+                 data-kt-sticky-name="inbox
+                    -aside-sticky" data-kt-sticky-offset="{default: false, xl: '100px'}"
+                 data-kt-sticky-width="{lg: '275px'}" data-kt-sticky-left="auto" data-kt-sticky-top="100px"
+                 data-kt-sticky-animation="false" data-kt-sticky-zindex="95">
+                <!--begin::Aside content-->
+                <div class="p-1">
+                    <!--begin::Menu-->
+                    <!--begin::Menu item-->
+                    <div class="menu">
+                        <ul>
+                            <li><a href="#">Vận chuyển</a></li>
+                            <li><a href="#">Quản lý Đơn Hàng</a></li>
+                            <li><a href="/Home/SanPham">Quản lý Sản Phẩm</a></li>
+                            <li><a href="#">Kênh Marketing</a></li>
+                            <li><a href="#">Quản lý khách hàng</a></li>
+                            <li><a href="#">Tài Chính</a></li>
+                            <li><a href="#">Dự Liệu</a></li>
+                            <li><a href="#">Phát Triển</a></li>
+                            <li><a href="#">Chăm sóc khách hàng</a></li>
+                            <li><a href="#">SBS</a></li>
+                            <li><a href="#">Quản lý Shop</a></li>
+                            <li><a href="#">Thiết Lập Shop</a></li>
+                        </ul>
+                    </div>
+
+                    <!--end::Menu item-->
+                </div>
+
+                <!--end::Menu-->
+                <!--end::Aside content-->
+            </div>
+            <!--end::Sticky aside-->
+        </div>
+        <!--end::Sidebar-->
+
+        <div class="d-flex flex-column col-12 col-lg-10">
+            <!--begin::Card-->
+            <div class="form-section">
+                <h2><b>Thông tin người cung cấp sản phẩm</b></h2>
+                <form action="#" method="post">
+                    <div class="info">
+                        <p><strong>Tên người cung cấp sản phẩm:</strong> <b>@user.HoTen</b>  </p>
+                        <div class="image">
+                            <img src="~/Upload/User/@user.Avatar" alt="Ảnh đại diện">
+                        </div>
+                        <p><strong>Mô Tả:</strong> @user.GioiThieu  </p>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="/Home/SuaThongTin" class="btn btn-success">Sửa thông tin giới thiệu</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (Request["sc"] == "1")
+    {
+        <script>Swal.fire("Sửa thông tin thành công.");</script>
+    }
+}

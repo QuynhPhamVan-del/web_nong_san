@@ -1,0 +1,51 @@
+﻿@model WebApp.Models.Banner
+
+@{
+    ViewBag.Title = "Thêm ngành nghề";
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+@using (Ajax.BeginForm("Create", "Banner", null,
+                       new AjaxOptions
+                       {
+                           HttpMethod = "Post",
+                           OnSuccess = "onAddSuccess",
+                           UpdateTargetId = "response",
+                           InsertionMode = InsertionMode.Replace,
+                       },
+                       new { enctype = "multipart/form-data" }
+                       ))
+{
+    <div class="dialog-model"></div>
+    <div class="dialog-content">
+        <div class="dialog-header">
+            <div class="header-content">THÔNG TIN BANNER</div>
+        </div>
+        <div class="dialog-main">
+            <div class="dialog-grid">
+                <div class="dialog-grid-center">
+                    <div class="grid-title">
+                    </div>
+                    <div class="infor-details">
+                        <label for="txtmaKH">Tên banner(<span style="color: red">*</span>)</label>
+                        @Html.EditorFor(model => model.TenBanner, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TenBanner, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="infor-details">
+                        <label for="txtmaKH">Chọn hình ảnh(<span style="color: red">*</span>)</label>
+                        <input type="file" name="HinhAnh" id="HinhAnh" class="form-control" />
+                    </div>
+                    <div class="infor-details">
+                        <label for="txtmaKH">Thứ tự(<span style="color: red">*</span>)</label>
+                        @Html.EditorFor(model => model.ThuTu, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ThuTu, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dialog-footer">
+            <a class="btn btn-success" style="color:white" onclick="closedialog()">Hủy</a> &nbsp;
+            <button class="btn btn-primary" type="submit">Lưu</button>
+        </div>
+    </div>
+
+}

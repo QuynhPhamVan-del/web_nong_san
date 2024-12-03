@@ -1,0 +1,2333 @@
+﻿@using WebApp.Models;
+@{
+    ViewBag.Title = "Home Page";
+    var banner = ViewData["banner"] as List<WebApp.Models.Banner>;
+    var sanpham = ViewData["sanpham"] as List<WebApp.Models.SanPham>;
+    var diaphuong = ViewData["diaphuong"] as List<WebApp.Models.DiaPhuong>;
+    var loai = ViewData["loai"] as List<WebApp.Models.LoaiSanPham>;
+
+}
+
+<div class="app-wrapper flex-column flex-row-fluid pt-1" id="kt_app_wrapper">
+    <swiper-container class="w-100" autoplay="true" loop="true" autoplay-delay="2000">
+        @foreach (var item in banner)
+        {
+            <swiper-slide>
+                <img class="w-100 h-auto" src="@item.Link" alt="@item.TenBanner">
+            </swiper-slide>
+        }
+    </swiper-container>
+
+    <div class="container d-flex flex-column p-5">
+        <div class="d-flex flex-wrap mb-3">
+            <div class="p-2 col-6 col-md-3">
+                <a href="#" class="bg-white shadow-sm rounded d-flex p-3">
+                    <img class="h-50px" src="~/assets/media/custom/icon_hoaqua.png" alt="">
+                    <div class="d-flex flex-column px-5 my-auto">
+                        <h4 class="fs-2">Hoa quả</h4>
+                        <p class="fs-6 h-50px mb-2 d-none d-md-block">
+                            Bao gồm các loại trái cây trong tỉnh
+                            Quảng Ninh
+                        </p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="p-2 col-6 col-md-3">
+                <a href="" class="bg-white shadow-sm rounded d-flex p-3">
+                    <img class="h-50px" src="~/assets/media/custom/icon_thuc_pham.png"
+                         alt="">
+                    <div class="d-flex flex-column px-5 my-auto">
+                        <h4 class="fs-2 d-none d-md-block">Thực phẩm</h4>
+                        <h4 class="fs-2 d-block d-md-none">Rau củ</h4>
+                        <p class="fs-6 h-50px mb-2 d-none d-md-block">
+                            Các loại rau củ, ngũ cốc, và các sản
+                            phẩm từ cây trồng
+                            khác
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="p-2 col-6 col-md-3">
+                <a href="#" class="bg-white shadow-sm rounded d-flex p-3">
+                    <img class="h-50px d-none d-md-block"
+                         src="~/assets/media/custom/icon_chan_nuoi.png" alt="">
+                    <img class="h-50px d-block d-md-none"
+                         src="~/assets/media/custom/icon_barbecue.png" alt="">
+                    <div class="d-flex flex-column px-5 my-auto">
+                        <h4 class="fs-2 d-none d-md-block">Chăn nuôi</h4>
+                        <h4 class="fs-2 d-block d-md-none">Thịt</h4>
+                        <p class="fs-6 h-50px mb-2 d-none d-md-block">
+                            Gia súc, gia cầm và các sản phẩm từ
+                            động vật
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="p-2 col-6 col-md-3">
+                <a href="" class="bg-white shadow-sm rounded d-flex p-3">
+                    <img class="h-50px" src="~/assets/media/custom/icon_sanphamsaykho.png"
+                         alt="">
+                    <div class="d-flex flex-column px-5 my-auto">
+                        <h4 class="fs-2 d-none d-md-block">Sản phẩm khô</h4>
+                        <h4 class="fs-2 d-block d-md-none">Đồ khô</h4>
+                        <p class="fs-6 h-50px mb-2 d-none d-md-block">
+                            Sản phẩm chế biến sẵn hoặc khô hoặc
+                            thực phẩm đã qua chế
+                            biến
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="container rounded shadow-sm bg-white px-0">
+            <div class="card-header border-0 d-flex justify-content-between">
+                <div class="card-title m-0 p-5"
+                     style="border-top-left-radius: var(--bs-border-radius); background: #5fa533">
+                    <h3 class="fw-bold m-0 text-white">
+                        <img class="h-20px" src="~/assets/media/custom/icon_la_cay.svg"
+                             alt="icon">
+                        Sản phẩm tươi mới
+                    </h3>
+                </div>
+                <div class="card-right p-5 my-auto d-flex">
+                    <a href="/Home/DanhSachSanPham" class="fs-5 d-flex">
+                        Xem tất cả
+                        <img class="h-15px my-auto ms-2"
+                             src="~/assets/media/custom/icon_to_right.svg" alt="icon">
+                    </a>
+                </div>
+            </div>
+            <!--begin::Content-->
+            <div class="p-2 p-md-5 border-top d-flex ">
+                <swiper-container class="w-100" pagination="false" space-between="0" free-mode="true"
+                                  autoplay="true" loop="true" autoplay-delay="3000" slides-per-view="2"
+                                  breakpoints='{"768":{"slidesPerView":4}}'>
+                    @foreach (var item in sanpham)
+                    {
+
+                        <swiper-slide>
+                            <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                <div class="card d-flex  rouder border border-3">
+                                    <a href="#">
+                                        <img class="rounded-top w-100"
+                                             src="~/Upload/SanPham/@item.HinhAnh"
+                                             alt="">
+                                    </a>
+                                    <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                        <a href="#" class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                            @item.TenSP
+                                        </a>
+                                        <a href="#" class="rating justify-content-start text-gray-700 fs-6">
+
+                                            <div class="rating-label checked">
+                                                <i class="fa fa-star fs-5"></i>
+                                            </div>
+                                            <div class="rating-label checked">
+                                                <i class="fa fa-star fs-5"></i>
+                                            </div>
+                                            <div class="rating-label checked">
+                                                <i class="fa fa-star fs-5"></i>
+                                            </div>
+                                            <div class="rating-label checked">
+                                                <i class="fa fa-star fs-5"></i>
+                                            </div>
+
+                                            <div class="rating-label checked">
+                                                <i class="fa fa-star-half-alt fs-5"></i>
+                                            </div>
+
+                                            (8)
+                                        </a>
+                                        <p class="fs-6 m-0 text-gray-700">Đã bán @item.SoLuongBan sản phẩm</p>
+
+                                        <div class="d-flex justify-content-between">
+                                            @if (item.GiamGia == 0)
+                                            {
+                                                <a href="#" class="d-flex flex-column">
+                                                    <div class="h-20px"></div>
+                                                    <div class="d-flex">
+                                                        <p class="mb-0 mt-0 fw-bold fs-4">@conver.ConvertToThousand64_From_Float(item.GiaTien) đ</p>
+                                                    </div>
+
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" class="d-flex flex-column">
+                                                    <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                        @conver.ConvertToThousand64_From_Float(item.GiaTien) đ
+                                                    </p>
+                                                    <div class="d-flex">
+                                                        <p class="mb-0 mt-0 fw-bold fs-4">@conver.ConvertToThousand64_From_Float((item.GiaTien * (100 - item.GiamGia) / 100)) đ</p>
+                                                        <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                            (-@item.GiamGia%)
+                                                        </p>
+                                                    </div>
+
+                                                </a>
+                                            }
+
+
+
+                                            <div class="d-none d-md-flex">
+
+
+                                                <i data-url="#"
+                                                   class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                <img class="w-30px mt-0 cursor-pointer card_product"
+                                                     src="~/assets/media/custom/icon_basket.svg"
+                                                     alt="">
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex d-md-none justify-content-around">
+
+
+                                            <i data-url="#"
+                                               class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                            <img class="w-25px mt-0 cursor-pointer card_product"
+                                                 src="~/assets/media/custom/icon_basket.svg"
+                                                 alt="">
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </swiper-slide>
+                    }
+                </swiper-container>
+
+
+            </div>
+            <!--end::Content-->
+        </div>
+
+        <div class="rounded shadow-sm bg-white px-0 mt-5">
+            <div class="card-header border-0 d-flex">
+                <div class="card-title m-0 p-5"
+                     style="border-top-left-radius: var(--bs-border-radius); background: #5fa533">
+                    <h3 class="fw-bold m-0 text-white d-none d-md-flex">
+                        <img class="h-20px" src="~/assets/media/custom/icon_pin_alt.svg"
+                             alt="icon">
+                        Đặc sản địa phương
+                    </h3>
+                    <h3 class="fw-bold m-0 text-white d-flex d-md-none">
+                        <img class="h-20px" src="~/assets/media/custom/icon_pin_alt.svg"
+                             alt="icon">
+                        Đặc sản
+                    </h3>
+                </div>
+                <div class="flex-grow-1 d-flex ms-3">
+                    <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2 d-flex">
+                        <!--begin:::Tab item-->
+                        @foreach (var item in diaphuong.Take(4))
+                        {
+                            <li class="nav-item mb-2 mt-auto">
+                                <a class="nav-link text-active-primary" data-bs-toggle="tab"
+                                   href="/Home/DanhSachSanPham?IdDiaPhuong=@item.Id">@item.TenDiaPhuong</a>
+                            </li>
+                        }
+                        <!--end:::Tab item-->
+                    </ul>
+                </div>
+                <div class="card-right p-5 my-auto d-none d-md-flex">
+                    <a href="#" class="fs-5 d-flex">
+                        Xem tất cả
+                        <img class="h-15px my-auto ms-2"
+                             src="~/assets/media/custom/icon_to_right.svg" alt="icon">
+                    </a>
+                </div>
+            </div>
+            <!--begin::Content-->
+            <div class="p-2 p-md-5 border-top tab-content">
+                <div class="tab-pane fade show active" id="kt_ecommerce_add_product_general_hl"
+                     role="tab-panel">
+                    <div class="d-flex">
+                        <div class="d-flex d-md-block d-none col-2">
+                            <img class="w-100" src="~/assets/media/custom/anh_tp_hl.png"
+                                 alt="">
+                        </div>
+
+                        <div class="col-12 col-md-10 d-flex flex-column">
+                            <h3 class="txt-title fs-2 ms-5">Người bán trong vùng</h3>
+                            <swiper-container class="w-100" pagination="false" space-between="0"
+                                              free-mode="true" autoplay="true" loop="true" autoplay-delay="2700"
+                                              slides-per-view="2" breakpoints='{"768":{"slidesPerView":4}}'>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 4 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 4 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 4 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 4 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 4 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 4 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 4 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 4 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                            </swiper-container>
+                            <h3 class="txt-title fs-2 ms-5 mt-5">Sản phẩm</h3>
+                            <swiper-container class="w-100" pagination="false" space-between="0"
+                                              free-mode="true" autoplay="true" loop="true" autoplay-delay="2700"
+                                              slides-per-view="2" breakpoints='{"768":{"slidesPerView":4}}'>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <div class="h-20px"></div>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            21.000 đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-5%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            22.000 đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-9%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            23.000 đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-13%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            24.000 đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-17%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            25.000 đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-20%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            26.000 đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-23%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            27.000 đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-26%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                            </swiper-container>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="kt_ecommerce_add_product_general_ub" role="tab-panel">
+                    <div class="d-flex">
+                        <div class="d-flex d-md-block d-none col-2">
+                            <img class="w-100" src="~/assets/media/custom/anh_tp_ub.png"
+                                 alt="">
+                        </div>
+
+                        <div class="col-12 col-md-10 d-flex flex-column">
+                            <h3 class="txt-title fs-2 ms-5">Người bán trong vùng</h3>
+                            <swiper-container class="w-100" pagination="false" space-between="0"
+                                              free-mode="true" autoplay="true" loop="true" autoplay-delay="2700"
+                                              slides-per-view="2" breakpoints='{"768":{"slidesPerView":4}}'>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 0 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 0 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 0 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 0 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 0 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 0 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 0 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column mt-3">
+
+                                                <div class="d-flex justify-content-between">
+
+                                                    <a href="#" class="fw-bold fs-4 my-auto">
+                                                        Trần văn
+                                                        nam
+                                                    </a>
+                                                    <a href="#" class="d-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    </a>
+
+                                                </div>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <p class="fs-6 m-0 text-gray-700">
+                                                    Có 0 sản phẩm trong cửa
+                                                    hàng
+                                                </p>
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                            </swiper-container>
+                            <h3 class="txt-title fs-2 ms-5 mt-5">Sản phẩm</h3>
+                            <swiper-container class="w-100" pagination="false" space-between="0"
+                                              free-mode="true" autoplay="true" loop="true" autoplay-delay="2700"
+                                              slides-per-view="2" breakpoints='{"768":{"slidesPerView":4}}'>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <div class="h-20px"></div>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            21.000 đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-5%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            22.000 đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-9%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            23.000 đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-13%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            24.000 đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-17%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            25.000 đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-20%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            26.000 đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-23%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                                <swiper-slide>
+                                    <div class="px-2 px-md-5 pt-0 pb-2 col-12">
+                                        <div class="card d-flex  rouder border border-3">
+                                            <a href="#">
+                                                <img class="rounded-top w-100"
+                                                     src="storage/../~/assets/media/custom/product/product_1.png"
+                                                     alt="">
+                                            </a>
+                                            <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                                <a href="#"
+                                                   class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                    Mật
+                                                    ong thiên nhiên
+                                                </a>
+                                                <a href="#"
+                                                   class="rating justify-content-start text-gray-700 fs-6">
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star fs-5"></i>
+                                                    </div>
+
+                                                    <div class="rating-label checked">
+                                                        <i class="fa fa-star-half-alt fs-5"></i>
+                                                    </div>
+
+                                                    (8)
+                                                </a>
+                                                <p class="fs-6 m-0 text-gray-700">Đã bán 1 sản phẩm</p>
+
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            27.000 đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">20.000 đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-26%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+
+                                                    <div class="d-none d-md-flex">
+
+
+                                                        <i data-url="#"
+                                                           class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg"
+                                                             alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex d-md-none justify-content-around">
+
+
+                                                    <i data-url="#"
+                                                       class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-25px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg"
+                                                         alt="">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </swiper-slide>
+                            </swiper-container>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--end::Content-->
+            <div class="card-right p-5 my-auto d-flex d-md-none justify-content-end w-100">
+                <a href="#" class="fs-5 d-flex">
+                    Xem tất cả
+                    <img class="h-15px my-auto ms-2"
+                         src="~/assets/media/custom/icon_to_right.svg" alt="icon">
+                </a>
+            </div>
+        </div>
+        @foreach (var item in loai)
+        {
+            var listsp = sanpham.Where(g => g.IdLoai == item.Id).ToList();
+
+
+            if (listsp.Count() >= 1)
+            {
+                <div class="container rounded shadow-sm bg-white px-0 mt-5">
+                    <div class="card-header border-0 d-flex justify-content-between">
+                        <div class="card-title m-0 p-5"
+                             style="border-top-left-radius: var(--bs-border-radius); background: #5fa533">
+                            <h3 class="fw-bold m-0 text-white">
+                                <img class="h-20px" src="~/assets/media/custom/icon_fruit.svg"
+                                     alt="icon">
+                                @item.TenLoaiSP
+                            </h3>
+                        </div>
+                        <div class="card-right p-5 my-auto d-flex">
+                            <a href="#" class="fs-5 d-flex">
+                                Xem tất cả
+                                <img class="h-15px my-auto ms-2"
+                                     src="~/assets/media/custom/icon_to_right.svg" alt="icon">
+                            </a>
+                        </div>
+                    </div>
+                    <!--begin::Content-->
+                    <div class="p-2 p-md-5 border-top d-flex flex-wrap">
+
+
+
+                        @if (listsp.Count >= 1)
+                        {
+                            foreach (var i in listsp)
+                            {
+                                <div class="px-2 px-md-5 pt-0 pb-2 col-6 col-md-4 col-lg-3">
+                                    <div class="card d-flex  rouder border border-3">
+                                        <a href="#">
+                                            <img class="rounded-top w-100"
+                                                 src="~/Upload/SanPham/@i.HinhAnh"
+                                                 alt="">
+                                        </a>
+                                        <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                            <a href="#" class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                @i.TenSP
+                                            </a>
+                                            <a href="#" class="rating justify-content-start text-gray-700 fs-6">
+
+                                                <div class="rating-label checked">
+                                                    <i class="fa fa-star fs-5"></i>
+                                                </div>
+                                                <div class="rating-label checked">
+                                                    <i class="fa fa-star fs-5"></i>
+                                                </div>
+                                                <div class="rating-label checked">
+                                                    <i class="fa fa-star fs-5"></i>
+                                                </div>
+                                                <div class="rating-label checked">
+                                                    <i class="fa fa-star fs-5"></i>
+                                                </div>
+
+                                                <div class="rating-label checked">
+                                                    <i class="fa fa-star-half-alt fs-5"></i>
+                                                </div>
+
+                                                (8)
+                                            </a>
+                                            <p class="fs-6 m-0 text-gray-700">Đã bán @i.SoLuongBan sản phẩm</p>
+
+                                            <div class="d-flex justify-content-between">
+                                                @if (i.GiamGia == 0)
+                                                {
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <div class="h-20px"></div>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">@conver.ConvertToThousand64_From_Float(i.GiaTien) đ</p>
+                                                        </div>
+
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            @conver.ConvertToThousand64_From_Float(i.GiaTien) đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">@conver.ConvertToThousand64_From_Float((i.GiaTien * (100 - i.GiamGia) / 100)) đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-@i.GiamGia%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+                                                }
+                                                <div class="d-none d-md-flex">
+
+
+                                                    <i data-url="#"
+                                                       class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <img class="w-30px mt-0 cursor-pointer card_product"
+                                                         src="~/assets/media/custom/icon_basket.svg" alt="">
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex d-md-none justify-content-around">
+
+
+                                                <i data-url="#"
+                                                   class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                <img class="w-25px mt-0 cursor-pointer card_product"
+                                                     src="~/assets/media/custom/icon_basket.svg" alt="">
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            }
+                        }
+
+
+
+                    </div>
+                    <!--end::Content-->
+                </div>
+            }
+
+        }
+
+
+
+    </div>
+
+</div>
+@section scripts{
+    @if (Request["sc"] == "1")
+    {
+        <script>
+            Swal.fire("Đăng nhập thành công.");
+        </script>
+    }
+    @if (Request["sc"] == "2")
+    {
+        <script>
+            Swal.fire("Đăng xuất khỏi hệ thống thành công.");
+        </script>
+    }
+    @if (Request["sc"] == "3")
+    {
+        <script>
+            Swal.fire("Cập nhật thông tin thành công.");
+        </script>
+    }
+}

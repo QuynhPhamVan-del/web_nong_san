@@ -1,0 +1,139 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<!--begin::Head-->
+
+<head>
+    <title>Nông sản Quảng Ninh | Đăng nhập</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="shortcut icon" href="~/assets/media/logos/favicon.ico" />
+    <!--begin::Fonts(mandatory for all pages)-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+    <link href="~/assets/plugins/global/plugins.bundle.css " rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    <!--end::Global Stylesheets Bundle-->
+</head>
+<!--end::Head-->
+<!--begin::Body-->
+
+<body id="kt_body" class="app-blank">
+    <!--begin::Theme mode setup on page load-->
+    <!--end::Theme mode setup on page load-->
+    <!--begin::Root-->
+    <div class="d-flex flex-column flex-root" id="kt_app_root">
+        <!--begin::Authentication - Sign-in -->
+        <div class="d-flex flex-column flex-lg-row flex-column-fluid flex-wrap">
+            <!--begin::Body-->
+            <!--begin::Body-->
+            <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-0 p-lg-10 order-1 order-lg-2 my-auto">
+                <!--begin::Form-->
+                <div class="d-flex flex-center flex-column flex-lg-row-fluid">
+                    <!--begin::Wrapper-->
+                    <div class="w-lg-500px p-10">
+                        <!--begin::Form-->
+                        <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="POST" data-kt-redirect-url=""
+                              action="/Home/Login" enctype="multipart/form-data">
+                            <input type="hidden" name="_token" value="j0RvzgmHY51cGZXa1ACbsXY3l5ysJBmzgjsnU7w7" autocomplete="off">                    <!--begin::Heading-->
+                            <div class="text-center mb-11">
+                                <img alt="Logo" src="~/assets/media/logos/logo.svg" class="h-90px mb-4" />
+                                <!--begin::Title-->
+                                <h1 class="text-dark fw-bolder mb-3">Đăng nhập vào tài khoản của bạn</h1>
+                                <!--end::Title-->
+                                <!--begin::Sign up-->
+                                <div class="text-gray-500 text-center fw-semibold fs-6">
+                                    Bạn chưa có tài khoản?
+                                    <a href="/Home/SignIn"
+                                       class="link-primary">Đăng ký ngay</a>
+                                </div>
+                                <!--end::Sign up-->
+                            </div>
+                            <!--begin::Heading-->
+                            <!--begin::Input group=-->
+                            <div class="fv-row mb-8">
+                                <!--begin::Email-->
+                                <input type="text" placeholder="Tài khoản của bạn" name="TenDangNhap" autocomplete="off"
+                                       class="form-control bg-transparent" />
+                                <!--end::Email-->
+                            </div>
+                            <!--end::Input group=-->
+                            <div class="fv-row mb-3">
+                                <!--begin::Password-->
+                                <input type="password" placeholder="Mật khẩu " name="MatKhau" autocomplete="off"
+                                       class="form-control bg-transparent" />
+                                <!--end::Password-->
+                            </div>
+                            <!--end::Input group=-->
+                            <!--begin::Wrapper-->
+                            <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
+                                <div></div>
+                                <!--begin::Link-->
+                                <a href="#" class="link-primary">Quên mật khẩu ?</a>
+                                <!--end::Link-->
+                            </div>
+                            <!--end::Wrapper-->
+                            <!--begin::Submit button-->
+                            <div class="d-grid mb-10">
+                                <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
+                                    <!--begin::Indicator label-->
+                                    <span class="indicator-label">Đăng nhập</span>
+                                    <!--end::Indicator label-->
+                                    <!--begin::Indicator progress-->
+                                    <span class="indicator-progress">
+                                        Vui lòng chờ...
+                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                    <!--end::Indicator progress-->
+                                </button>
+                            </div>
+                            <!--end::Submit button-->
+
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Form-->
+            </div>
+            <!--end::Body-->
+            <!--end::Body-->
+            <!--begin::Aside-->
+            <div class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-2 order-lg-1"
+                 style="background-image: url(../assets/media/custom/bg_login.png">
+                <img class="m-auto w-75 h-auto py-5" src="~/assets/media/custom/text_bg_login.png" alt="">
+            </div>
+            <!--end::Aside-->
+        </div>
+        <!--end::Authentication - Sign-in-->
+    </div>
+    <!--end::Root-->
+    <!--begin::Javascript-->
+    <script>var hostUrl = "~/assets/";</script>
+    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+    <script src="~/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="~/assets/js/scripts.bundle.js"></script>
+    <!--end::Global Javascript Bundle-->
+    <!--begin::Custom Javascript(used for this page only)-->
+    <!--end::Custom Javascript-->
+    <!--end::Javascript-->
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @if (Request["sc"] == "1")
+        {
+            <script>
+                Swal.fire("Đăng kí tài khoản thành công.");
+            </script>
+        }
+    
+</body>
+<!--end::Body-->
+
+</html>

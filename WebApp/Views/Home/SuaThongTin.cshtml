@@ -1,0 +1,220 @@
+﻿
+@{
+    ViewBag.Title = "TrangBanHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = Session["user"] as WebApp.Models.ThongTin;
+}
+
+<div id="kt_app_content" class="app-content mt-5 container">
+    <!--begin::Inbox App - Compose -->
+    <div class="d-flex flex-column flex-lg-row">
+
+        <!--begin::Sidebar-->
+        <div class="d-none d-lg-flex flex-column flex-lg-row-auto col-12 col-lg-2" data-kt-drawer="true"
+             data-kt-drawer-name="inbox-aside" data-kt-drawer-activate="{default: true, lg: false}"
+             data-kt-drawer-overlay="true" data-kt-drawer-width="225px" data-kt-drawer-direction="start"
+             data-kt-drawer-toggle="#kt_inbox_aside_toggle">
+            <!--begin::Sticky aside-->
+            <div class="mt-lg-0" data-kt-sticky="false" style="margin-top: 40px"
+                 data-kt-sticky-name="inbox
+                    -aside-sticky" data-kt-sticky-offset="{default: false, xl: '100px'}"
+                 data-kt-sticky-width="{lg: '275px'}" data-kt-sticky-left="auto" data-kt-sticky-top="100px"
+                 data-kt-sticky-animation="false" data-kt-sticky-zindex="95">
+                <!--begin::Aside content-->
+                <div class="p-1">
+                    <!--begin::Menu-->
+                    <!--begin::Menu item-->
+                    <div class="menu">
+                        <ul>
+                            <li><a href="#">Vận chuyển</a></li>
+                            <li><a href="#">Quản lý Đơn Hàng</a></li>
+                            <li><a href="/Home/SanPham">Quản lý Sản Phẩm</a></li>
+                            <li><a href="#">Kênh Marketing</a></li>
+                            <li><a href="#">Quản lý khách hàng</a></li>
+                            <li><a href="#">Tài Chính</a></li>
+                            <li><a href="#">Dự Liệu</a></li>
+                            <li><a href="#">Phát Triển</a></li>
+                            <li><a href="#">Chăm sóc khách hàng</a></li>
+                            <li><a href="#">SBS</a></li>
+                            <li><a href="#">Quản lý Shop</a></li>
+                            <li><a href="#">Thiết Lập Shop</a></li>
+                        </ul>
+                    </div>
+
+                    <!--end::Menu item-->
+                </div>
+
+                <!--end::Menu-->
+                <!--end::Aside content-->
+            </div>
+            <!--end::Sticky aside-->
+        </div>
+        <!--end::Sidebar-->
+
+        <div class="d-flex flex-column col-12 col-lg-10">
+            <!--begin::Card-->
+            <div class="card-header d-flex align-items-center justify-content-between py-3">
+                <h2 class="card-title m-0">Chỉnh sửa thông tin người bán hàng</h2>
+                <!--begin::Toggle-->
+                <a href="#"
+                   class="btn btn-sm btn-icon btn-color-primary btn-light btn-active-light-primary d-lg-none"
+                   data-bs-toggle="tooltip" data-bs-dismiss="click" data-bs-placement="top"
+                   title="Cài đặt" id="kt_inbox_aside_toggle">
+                    <i class="ki-outline ki-abstract-14 fs-3 m-0"></i>
+                </a>
+                <!--end::Toggle-->
+            </div>
+            <div class="card-body p-0">
+                <!--begin::Form-->
+                <div id="kt_inbox_compose_form">
+                    <!--begin::Body-->
+                    <div class="d-block">
+                        <form id="kt_account_profile_details_form" class="form"
+                              action="/Home/SuaThongTin" method="POST"
+                              enctype="multipart/form-data">
+                            <input type="hidden" name="Id"
+                                   value="@user.Id">
+                            <input type="hidden" name="IdTK"
+                                   value="@user.IdTK">
+                            <input type="hidden" name="Avatar" value="@user.Avatar">
+                            <input type="hidden" name="NgaySinh" value="@user.NgaySinh">
+                            <input type="hidden" name="GioiTinh" value="@user.GioiTinh">
+                            <input type="hidden" name="Email" value="@user.Email">
+                            <input type="hidden" name="CMND" value="@user.CMND">
+                            <input type="hidden" name="SDT" value="@user.SDT">
+                            <input type="hidden" name="DiaChi" value="@user.DiaChi">
+                            <input type="hidden" name="IdDiaPhuong" value="@user.IdDiaPhuong">
+                            <!--begin::Card body-->
+                            <div class="card-body border-top p-9">
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                        Ảnh đại
+                                        diện
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <div class="col-lg-8">
+                                        <!--begin::Image input-->
+                                        <div class="image-input image-input-outline"
+                                             data-kt-image-input="true"
+                                             style="background-image: url('assets/media/svg/avatars/blank.svg')">
+                                            <!--begin::Preview existing avatar-->
+                                            <div class="image-input-wrapper w-125px h-125px"
+                                                 style="background-image: url(../../Upload/User/@user.Avatar)"></div>
+                                            <!--end::Preview existing avatar-->
+                                            <!--begin::Label-->
+                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                   data-kt-image-input-action="change"
+                                                   data-bs-toggle="tooltip"
+                                                   title="Thay đổi ảnh đại diện">
+                                                <i class="ki-outline ki-pencil fs-7"></i>
+                                                <!--begin::Inputs-->
+                                                <input type="file" name="Avatar"
+                                                       accept=".png, .jpg, .jpeg" />
+                                                <input type="hidden" name="avatar_remove" />
+                                                <!--end::Inputs-->
+                                            </label>
+                                            <!--end::Label-->
+                                            <!--begin::Cancel-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                  data-kt-image-input-action="cancel"
+                                                  data-bs-toggle="tooltip" title="Hủy ảnh đại diện">
+                                                <i class="ki-outline ki-cross fs-2"></i>
+                                            </span>
+                                            <!--end::Cancel-->
+                                            <!--begin::Remove-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                  data-kt-image-input-action="remove"
+                                                  data-bs-toggle="tooltip" title="Xóa ảnh đại diện">
+                                                <i class="ki-outline ki-cross fs-2"></i>
+                                            </span>
+                                            <!--end::Remove-->
+                                        </div>
+                                        <!--end::Image input-->
+                                        <br>
+                                        <br>
+                                    </div>
+
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">
+                                        Họ
+                                        và tên
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <div class="col-lg-8">
+
+                                        <div class="row">
+
+                                            <div class="col-lg-12 fv-row">
+                                                <input type="text" name="HoTen"
+                                                       class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
+                                                       placeholder="Họ và tên" value="@user.HoTen" />
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">
+                                        Giới thiệu bản thân
+                                    </label>
+                                    <!--end::Label-->
+
+                                    <div class="col-lg-8">
+
+                                        <div class="row">
+
+                                            <div class="col-lg-12 fv-row">
+                                                <textarea type="text" name="GioiThieu" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" rows="10">@user.GioiThieu
+</textarea>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <!--end::Input group-->
+                            </div>
+                            <!--end::Card body-->
+                            <!--begin::Actions-->
+                            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                <button type="reset"
+                                        class="btn btn-light btn-active-light-primary me-2">
+                                    Hủy
+                                </button>
+                                <button type="submit" class="btn btn-primary"
+                                        id="kt_account_profile_details_submit">
+                                    Lưu
+                                </button>
+                            </div>
+                            <!--end::Actions-->
+                        </form>
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Form-->
+            </div>
+        </div>
+
+    </div>
+</div>
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (Request["sc"] == "1")
+    {
+        <script>Swal.fire("Lỗi thông tin.");</script>
+    }
+}
