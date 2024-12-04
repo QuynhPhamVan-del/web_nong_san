@@ -19,6 +19,7 @@ namespace WebApp.Controllers
             ViewData["sanpham"] = db.SanPham.ToList();
             ViewData["diaphuong"] = db.DiaPhuong.ToList();
             ViewData["loai"] = db.LoaiSanPham.ToList();
+            ViewData["thongtin"] = db.ThongTin.ToList();
             return View();
         }
 
