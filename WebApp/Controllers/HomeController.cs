@@ -93,7 +93,7 @@ namespace WebApp.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Sua([Bind(Include = "Id,TenSP,GiaTien,MoTa,IdTK,HSD,GiamGia,IdLoai")] SanPham sanpham, HttpPostedFileBase HinhAnh)
+        public ActionResult Sua([Bind(Include = "Id,TenSP,GiaTien,MoTa,IdTK,HSD,GiamGia,IdLoai,HinhAnh,IdDiaPhuong")] SanPham sanpham, HttpPostedFileBase HinhAnh)
         {
             ViewData["loai"] = db.LoaiSanPham.ToList();
             ViewData["diaphuong"] = db.DiaPhuong.ToList();
