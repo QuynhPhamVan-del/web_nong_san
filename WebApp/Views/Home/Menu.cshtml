@@ -1,8 +1,25 @@
-﻿@{
+﻿@using WebApp.Models
+@{
     Layout = null;
     var menu = ViewData["menu"] as List<WebApp.Models.LoaiSanPham>;
     var diaphuong = ViewData["diaphuong"] as List<WebApp.Models.DiaPhuong>;
     var user = Session["user"] as WebApp.Models.ThongTin;
+    var routeData = HttpContext.Current.Request.RequestContext.RouteData;
+    string controllerName = routeData.Values["controller"].ToString();
+    string actionName = routeData.Values["action"].ToString();
+    <style>
+           .active{
+               font-weight:700;
+               color:black;
+           }
+           
+    </style>
+    Cart cart = Session["Cart"] as Cart;
+    int count = 0;
+    if (cart != null)
+    {
+        count = cart.Items.Count();
+    }
 }
 
 <div class="app-header-menu app-header-mobile-drawer align-items-stretch" data-kt-drawer="true"
@@ -15,11 +32,10 @@
     <div class="menu menu-rounded menu-active-bg menu-state-primary menu-column menu-lg-row menu-title-gray-700 menu-icon-gray-500 menu-arrow-gray-500 menu-bullet-gray-500 my-5 my-lg-0 align-items-stretch fw-semibold px-2 px-lg-0"
          id="kt_app_header_menu" data-kt-menu="true">
         <!--begin:Menu item-->
-        <div class="here show menu-item menu-here-bg me-0 me-lg-2">
+        <div class="menu-item menu-here-bg me-0 me-lg-2 active">
             <!--begin:Menu link-->
-            <a href="/Home" class="menu-link">
-                <span class="menu-title fs-4">Trang chủ</span>
-                <span class="menu-arrow d-lg-none"></span>
+            <a href="/Home" class="menu-link menu-title fs-4">
+                Trang chủ
             </a>
             <!--end:Menu link-->
         </div>
@@ -27,29 +43,28 @@
         <!--begin:Menu item-->
         <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
              data-kt-menu-placement="bottom-start"
-             class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+             class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2 active">
             <!--begin:Menu link-->
-            <span class="menu-link">
-                <span class="menu-title fs-4">Sản phẩm</span>
-                <span class="menu-arrow d-lg-none"></span>
-            </span>
+            <a href="/Home/DanhSachSanPham" class="menu-link menu-title fs-4">
+                Sản phẩm
+            </a>
             <!--end:Menu link-->
             <!--begin:Menu sub-->
-            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-250px">
+            <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-250px active">
                 @foreach (var item in menu.Where(g => g.CapMenu == 2))
                 {
                     <div data-kt-menu-trigger="{default:'click', lg: 'hover'}"
                          data-kt-menu-placement="right-start"
                          class="menu-item menu-lg-down-accordion">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="/Home/DanhSachSanPham?IdLoai=@item.Id">
+                        <span class="menu-link">
                             <span class="menu-icon">
                                 <img src="~/assets/media/custom/iocn_map_duotone.svg"
                                      alt="">
                             </span>
-                            <span class="menu-title fs-4">@item.TenLoaiSP</span>
+                            <a  href="/Home/DanhSachSanPham?IdLoai=@item.Id" class="menu-title fs-4">@item.TenLoaiSP</a>
                             <span class="menu-arrow"></span>
-                        </a>
+                        </span>
                     </div>
                 }
 
@@ -62,7 +77,7 @@
         <!--begin:Menu item-->
         @foreach (var item in menu.Where(g=>g.CapMenu==1))
         {
-            <div class="menu-item menu-here-bg me-0 me-lg-2">
+            <div class="menu-item menu-here-bg me-0 me-lg-2 active">
                 <!--begin:Menu link-->
                 <a href="/Home/DanhSachSanPham?IdLoai=@item.Id" class="menu-link">
                     <span class="menu-title fs-4">@item.TenLoaiSP</span>
@@ -76,7 +91,7 @@
         <!--begin:Menu item-->
         <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}"
              data-kt-menu-placement="bottom-start" data-kt-menu-offset="-50,0"
-             class="menu-item menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
+             class="menu-item menu-here-bg menu-lg-down-accordion me-0 me-lg-2 active">
             <!--begin:Menu link-->
             <span class="menu-link">
                 <span class="menu-title fs-4">Địa phương</span>
@@ -243,17 +258,17 @@
            class="d-lg-block d-blobk icon_noti ms-2 btn btn-icon btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px">
             <img class="w-30px" src="~/assets/media/custom/icon_heart.svg"
                  alt="">
-            <div class="notification">
-                <p>1</p>
-            </div>
+            @*<div class="notification" style="display:none;">
+                <p >1</p>
+            </div>*@
         </a>
         <!--end::Menu wrapper-->
-        <a href="#"
+        <a href="/ShoppingCart/ShowToCart"
            class="d-lg-block d-blobk icon_noti ms-2 btn btn-icon btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px">
             <img class="w-30px" src="~/assets/media/custom/icon_basket.svg"
                  alt="">
-            <div class="notification">
-                <p>1</p>
+            <div class="notification" style="display:@(count==0?"none":"block");">
+                <p id="myParagraph">@count</p>
             </div>
         </a>
     </div>

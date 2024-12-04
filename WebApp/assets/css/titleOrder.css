@@ -1,0 +1,128 @@
+/* Reset các thuộc tính mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Cấu trúc tổng thể */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+    background-color: #333;
+    color: white;
+}
+
+header .logo img {
+    width: 40px;
+    height: 40px;
+}
+
+header .user-info {
+    display: flex;
+    align-items: center;
+}
+
+header .user-info span {
+    color: white;
+}
+
+/* Đơn hàng container */
+.order-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Section */
+.section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Thông tin sản phẩm */
+.product-info {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.product-info th, .product-info td {
+    padding: 10px;
+    text-align: left;
+}
+
+.product-info th {
+    background-color: #f0f0f0;
+}
+
+.product-info img {
+    width: 50px;
+    height: 50px;
+}
+
+/* Ghi chú */
+.note textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Vận chuyển */
+.shipping-cost {
+    margin-top: 10px;
+}
+
+/* Voucher và thanh toán */
+.voucher, .payment-method {
+    margin-bottom: 20px;
+}
+
+.summary {
+    font-size: 18px;
+}
+
+.summary p {
+    margin-bottom: 5px;
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.back-btn {
+    background-color: #ccc;
+}
+
+.submit-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
+}

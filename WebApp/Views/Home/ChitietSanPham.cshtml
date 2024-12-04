@@ -1,0 +1,261 @@
+﻿@model WebApp.Models.SanPham
+@{
+    ViewBag.Title = "ChitietSanPham";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var thongtin = ViewData["thongtin"] as List<WebApp.Models.ThongTin>;
+    var sp = ViewData["sanpham"] as List<WebApp.Models.SanPham>;
+}
+
+<div class="app-wrapper flex-column flex-row-fluid pt-1">
+
+    <div class="container d-flex flex-column p-5">
+        <div class="d-flex container mt-3 flex-wrap">
+            <div class="d-flex flex-column">
+                <div class="w-500px h-500px" style="aspect-ratio: 1 / 1; background-color: lightblue;">
+                    <swiper-container class="w-100 h-100"
+                                      style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff;" class="mySwiper"
+                                      thumbs-swiper=".mySwiper2" loop="true" space-between="10" navigation="true">
+                        <swiper-slide>
+                            <img src="~/Upload/SanPham/@Model.HinhAnh" style="aspect-ratio: 1 / 1;width:100%"/>
+                        </swiper-slide>
+               
+                    </swiper-container>
+                </div>
+
+
+                @*<swiper-container class="mySwiper2 w-500px h-100px" loop="true" space-between="10" slides-per-view="4"
+                                  free-mode="true" watch-slides-progress="true">
+                    <swiper-slide>
+                        <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                    </swiper-slide>
+                    <swiper-slide>
+                        <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                    </swiper-slide>
+                    <swiper-slide>
+                        <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                    </swiper-slide>
+                    <swiper-slide>
+                        <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                    </swiper-slide>
+                </swiper-container>*@
+            </div>
+
+            <div class="d-flex flex-column ps-20 flex-grow-1">
+                <h1 class="fw-bold" style="color: #093D09; font-size: 3rem; ">@Model.TenSP</h1>
+
+                <div class="d-flex">
+                    <a href="#" class="rating justify-content-start text-gray-700 fs-4 mb-0">
+                        4.5
+                        <div class="rating-label checked">
+                            <i class="fa fa-star fs-5"></i>
+                        </div>
+                        <div class="rating-label checked">
+                            <i class="fa fa-star fs-5"></i>
+                        </div>
+                        <div class="rating-label checked">
+                            <i class="fa fa-star fs-5"></i>
+                        </div>
+                        <div class="rating-label checked">
+                            <i class="fa fa-star fs-5"></i>
+                        </div>
+
+                        <div class="rating-label checked">
+                            <i class="fa fa-star-half-alt fs-5"></i>
+                        </div>
+                    </a>
+
+                    <div class="d-flex ms-10">
+                        <p class="fw-bold fs-5 m-0">Lượt mua: </p>
+                        <p class="fs-5 fw-bold ms-2 mb-0" style="color: #1A5319">@Model.SoLuongBan</p>
+                    </div>
+
+                </div>
+
+
+                <div class="d-flex mt-20 flex-column">
+                    <div class="d-flex">
+                        <div class="d-flex">
+                            <p class="fs-4 fw-bold me-3">Ngày thu hoạch:</p>
+                            <p class="fs-4 fw-bold me-3" style="color: #1A5319"> @Model.NgayDang.Value.ToString("dd/MM/yyyy")</p>
+                        </div>
+                        <div class="d-flex">
+                            <div class="d-flex">
+                                <p class="fs-4 fw-bold me-3">Ngày hết hạn:</p>
+                                <p class="fs-4 fw-bold me-3" style="color: #1A5319"> @Model.NgayDang.Value.AddDays(Convert.ToDouble(Model.HSD)).ToString("dd/MM/yyyy")</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <p class="fs-4 fw-bold me-3">Người bán:</p>
+                        <p class="fs-4 fw-bold me-3" style="color: #1A5319"> @thongtin.FirstOrDefault(g=>g.IdTK==Model.IdTK).HoTen</p>
+                    </div>
+                </div>
+
+                <div class="d-flex">
+                    @if (Model.GiamGia > 0)
+                    {
+                        <p class="fw-bold m-0 text-gray-600 text-decoration-line-through fs-2 my-auto">
+                            @WebApp.Models.conver.ConvertToThousand64_From_Float(Model.GiaTien) đ
+                        </p>
+                        <p class="fw-bold m-0 fs-1 my-auto ms-3 text-danger">
+                            @WebApp.Models.conver.ConvertToThousand64(Model.GiaTien * (100 - @Model.GiamGia) / 100) đ
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="fw-bold m-0 fs-1 my-auto ms-3 text-danger">
+                            @WebApp.Models.conver.ConvertToThousand64(Model.GiaTien) đ
+                        </p>
+                    }
+
+                </div>
+
+                <div class="d-flex mt-4 flex-grow-1">
+                    <div class="">
+                        <p class="fs-4 text-nowrap my-auto pe-4">
+                            Số lượng
+                        </p>
+                        <input type="text" name="name"
+                               class="h-25px w-200px me-5 my-auto py-1 form-control form-control-sm mb-3 mb-lg-0 rounded-0"
+                               style="border-color: #1B891D" value="">
+                    </div>
+                </div>
+
+                <div class="d-flex mt-4 flex-grow-1 justify-content-end">
+                    <a class="btn ms-auto my-auto me-5" style="border: 1px solid #1B891D;">
+                        <i class="fa-solid fa-cart-shopping fs-1" style="color:#1B891D "></i>
+                    </a>
+
+                    <button class="btn my-auto" style="border: 1px solid #1B891D; color: #1B891D">Thanh toán</button>
+                </div>
+            </div>
+
+            <div class="w-100 d-flex flex-column">
+                @*<p class="d-flex py-2 px-5 bg-gray-300 mt-5 w-100 fs-2 fw-bold" style="color: #1A5319">
+                    CHI TIẾT SẢN PHẨM
+                </p>
+                <p class="fs-4 ms-20">Kho: 12kg</p>
+                <p class="fs-4 ms-20">Gửi từ: Hoành Bồ, Hạ Long, Quảng Ninh</p>*@
+
+                <p class="d-flex py-2 px-5 bg-gray-300 mt-5 w-100 fs-2 fw-bold" style="color: #1A5319">
+                    MÔ TẢ SẢN PHẨM
+                </p>
+
+               @Html.Raw(Model.MoTa)
+
+                <div class="container rounded shadow-sm bg-white px-0 mt-5">
+                    <div class="card-header border-0 d-flex justify-content-between">
+                        <div class="card-title m-0 p-5" style="border-top-left-radius: var(--bs-border-radius); background: #5fa533">
+                            <h3 class="fw-bold m-0 text-white">
+                                Sản phẩm trong vùng
+                            </h3>
+                        </div>
+                        <div class="card-right p-5 my-auto d-flex">
+                            <a href="/Home/DanhSachSanPham?IdDiaPhuong=@Model.IdDiaPhuong" class="fs-5 d-flex">
+                                Xem tất cả
+                      
+
+                                <img src="~/assets/media/custom/icon_to_right.svg" />
+                            </a>
+                        </div>
+                    </div>
+                    <!--begin::Content-->
+                    <div class="p-2 p-md-5 border-top d-flex flex-wrap">
+                        @foreach (var i in sp.Take(6))
+                        {
+                        <div class="px-2 px-md-5 pt-0 pb-2 col-6 col-md-4 col-lg-3">
+                            <div class="card d-flex  rouder border border-3">
+                                <a href="#">
+                                    <img class="rounded-top w-100"
+                                         src="~/Upload/SanPham/@i.HinhAnh"
+                                         alt="">
+                                </a>
+                                <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                    <a href="/Home/ChiTietSanPham?Id=@i.Id" class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                        @i.TenSP
+                                    </a>
+                                    <a href="#" class="rating justify-content-start text-gray-700 fs-6">
+
+                                        <div class="rating-label checked">
+                                            <i class="fa fa-star fs-5"></i>
+                                        </div>
+                                        <div class="rating-label checked">
+                                            <i class="fa fa-star fs-5"></i>
+                                        </div>
+                                        <div class="rating-label checked">
+                                            <i class="fa fa-star fs-5"></i>
+                                        </div>
+                                        <div class="rating-label checked">
+                                            <i class="fa fa-star fs-5"></i>
+                                        </div>
+
+                                        <div class="rating-label checked">
+                                            <i class="fa fa-star-half-alt fs-5"></i>
+                                        </div>
+
+                                        (8)
+                                    </a>
+                                    <p class="fs-6 m-0 text-gray-700">Đã bán @i.SoLuongBan sản phẩm</p>
+
+                                    <div class="d-flex justify-content-between">
+                                        @if (i.GiamGia == 0)
+                                        {
+                                            <a href="#" class="d-flex flex-column">
+                                                <div class="h-20px"></div>
+                                                <div class="d-flex">
+                                                    <p class="mb-0 mt-0 fw-bold fs-4">@WebApp.Models.conver.ConvertToThousand64_From_Float(i.GiaTien) đ</p>
+                                                </div>
+
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" class="d-flex flex-column">
+                                                <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                    @WebApp.Models.conver.ConvertToThousand64_From_Float(i.GiaTien) đ
+                                                </p>
+                                                <div class="d-flex">
+                                                    <p class="mb-0 mt-0 fw-bold fs-4">@WebApp.Models.conver.ConvertToThousand64_From_Float((i.GiaTien * (100 - i.GiamGia) / 100)) đ</p>
+                                                    <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                        (-@i.GiamGia%)
+                                                    </p>
+                                                </div>
+
+                                            </a>
+                                        }
+                                        <div class="d-none d-md-flex">
+
+
+                                            <i data-url="#"
+                                               class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                            <img class="w-30px mt-0 cursor-pointer card_product"
+                                                 src="~/assets/media/custom/icon_basket.svg" alt="">
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex d-md-none justify-content-around">
+
+
+                                        <i data-url="#"
+                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                        <img class="w-25px mt-0 cursor-pointer card_product"
+                                             src="~/assets/media/custom/icon_basket.svg" alt="">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                        }
+                    </div>
+                    <!--end::Content-->
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>

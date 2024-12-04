@@ -1,0 +1,206 @@
+/* Reset các thuộc tính mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Cấu trúc tổng thể */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+    background-color: #28a745;
+    color: white;
+}
+
+header .logo img {
+    width: 40px;
+    height: 40px;
+}
+
+header .user-info {
+    display: flex;
+    align-items: center;
+}
+
+header .user-info span {
+    color: white;
+}
+
+/* Product Detail Container */
+.product-detail-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Product Images */
+.product-images {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.main-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+}
+
+.thumbnail-images {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.thumbnail {
+    width: 80px;
+    height: auto;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.thumbnail:hover {
+    opacity: 0.7;
+}
+
+/* Product Info */
+.product-info {
+    flex: 2;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-info h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.product-rating span {
+    font-size: 14px;
+    color: #777;
+}
+
+.product-info p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #03010a;
+    margin-top: 10px;
+}
+
+.quantity-selector {
+    margin-top: 20px;
+}
+
+.quantity-selector label {
+    font-size: 16px;
+}
+
+.quantity-btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.quantity-btn:focus {
+    outline: none;
+}
+
+.quantity-selector input {
+    width: 50px;
+    text-align: center;
+    font-size: 16px;
+    padding: 5px;
+    margin: 0 10px;
+}
+
+.buy-now-btn {
+    background-color: #e8e9e9;
+    color: white;
+    font-size: 15px;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.buy-now-btn:hover {
+    background-color: #7cadd4;
+}
+
+/* Share Section */
+.share {
+    margin-top: 20px;
+}
+
+.share p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.share a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.share a:hover {
+    text-decoration: underline;
+}
+
+/* Product Description */
+.product-description {
+    margin-top: 30px;
+}
+
+.product-description h3 {
+    font-size: 20px;
+    margin-bottom: 25px;
+    background-color: #28a745;
+}
+
+.product-description p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Product Details */
+.product-details {
+    margin-top: 30px;
+}
+
+.product-details h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+     background-color: #28a745;
+}
+
+.product-details p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 14px;
+    color: #777;
+}

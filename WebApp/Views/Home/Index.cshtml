@@ -91,7 +91,7 @@
                     </h3>
                 </div>
                 <div class="card-right p-5 my-auto d-flex">
-                    <a href="/Home/DanhSachSanPham" class="fs-5 d-flex">
+                    <a href="/Home/DanhSachSanPham?IdLoc=4" class="fs-5 d-flex">
                         Xem tất cả
                         <img class="h-15px my-auto ms-2"
                              src="~/assets/media/custom/icon_to_right.svg" alt="icon">
@@ -115,7 +115,7 @@
                                              alt="">
                                     </a>
                                     <div class="px-2 px-md-5 pb-5 d-flex flex-column">
-                                        <a href="#" class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                        <a href="/Home/ChiTietSanPham?Id=@item.Id" class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
                                             @item.TenSP
                                         </a>
                                         <a href="#" class="rating justify-content-start text-gray-700 fs-6">
@@ -234,7 +234,7 @@
                     </ul>
                 </div>
                 <div class="card-right p-5 my-auto d-none d-md-flex">
-                    <a href="#" class="fs-5 d-flex">
+                    <a href="/Home/DanhSachSanPham" class="fs-5 d-flex">
                         Xem tất cả
                         <img class="h-15px my-auto ms-2"
                              src="~/assets/media/custom/icon_to_right.svg" alt="icon">
@@ -2218,7 +2218,7 @@
                                                  alt="">
                                         </a>
                                         <div class="px-2 px-md-5 pb-5 d-flex flex-column">
-                                            <a href="#" class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                            <a href="/Home/ChiTietSanPham?Id=@i.Id" class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
                                                 @i.TenSP
                                             </a>
                                             <a href="#" class="rating justify-content-start text-gray-700 fs-6">

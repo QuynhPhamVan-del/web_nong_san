@@ -33,5 +33,7 @@ namespace WebApp.Models
         public virtual DbSet<DanhGia> DanhGia { get; set; }
         public virtual DbSet<ThongTin> ThongTin { get; set; }
         public virtual DbSet<SanPham> SanPham { get; set; }
+        public virtual DbSet<ChiTietDonHang> ChiTietDonHang { get; set; }
+        public virtual DbSet<DonHang> DonHang { get; set; }
     }
 }

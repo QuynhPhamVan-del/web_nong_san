@@ -138,10 +138,15 @@
     <Compile Include="Areas\Admin\Controllers\BannerController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Banner.cs">
+      <DependentUpon>Dbcontext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\ChiTietDonHang.cs">
       <DependentUpon>Dbcontext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\conver.cs" />
@@ -164,6 +169,9 @@
       <DependentUpon>Dbcontext.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DiaPhuong.cs">
+      <DependentUpon>Dbcontext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DonHang.cs">
       <DependentUpon>Dbcontext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoaiSanPham.cs">
@@ -1364,6 +1372,10 @@
     <Content Include="Areas\Admin\assets\vendor\libs\popper\popper.js" />
     <Content Include="assets\css\custom.css" />
     <Content Include="assets\css\style.bundle.css" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\css\style_newproduct.css" />
+    <Content Include="assets\css\titleOrder.css" />
+    <Content Include="assets\css\titleProduct.css" />
     <Content Include="assets\js\Bootstrap.min.js" />
     <Content Include="assets\js\custom\account\api-keys\api-keys.js" />
     <Content Include="assets\js\custom\account\billing\general.js" />
@@ -5495,6 +5507,11 @@
     <Content Include="Views\Home\SanPham.cshtml" />
     <Content Include="Views\Home\ThemMoi.cshtml" />
     <Content Include="Views\Home\Sua.cshtml" />
+    <Content Include="Views\Home\DanhSachSanPham.cshtml" />
+    <Content Include="Views\Home\ChitietSanPham.cshtml" />
+    <Content Include="Views\ShoppingCart\ShowToCart.cshtml" />
+    <Content Include="Views\ShoppingCart\ThanhToan.cshtml" />
+    <Content Include="Views\Home\QuanLyDonHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

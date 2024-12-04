@@ -46,6 +46,8 @@
     <EntitySet Name="DanhGia" EntityType="Web_Nong_SanModel.DanhGia" />
     <EntitySet Name="ThongTin" EntityType="Web_Nong_SanModel.ThongTin" />
     <EntitySet Name="SanPham" EntityType="Web_Nong_SanModel.SanPham" />
+    <EntitySet Name="ChiTietDonHang" EntityType="Web_Nong_SanModel.ChiTietDonHang" />
+    <EntitySet Name="DonHang" EntityType="Web_Nong_SanModel.DonHang" />
   </EntityContainer>
   <EntityType Name="LoaiSanPham">
     <Key>
@@ -99,5 +101,28 @@
     <Property Name="GiamGia" Type="Int32" />
     <Property Name="SoLuongBan" Type="Int32" />
     <Property Name="IdLoai" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ChiTietDonHang">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdDH" Type="Int32" />
+    <Property Name="IdSP" Type="Int32" />
+    <Property Name="SoLuongMua" Type="Int32" />
+    <Property Name="GiaTien" Type="Double" />
+    <Property Name="IdCuaHang" Type="Int32" />
+  </EntityType>
+  <EntityType Name="DonHang">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NgayDatHang" Type="DateTime" Precision="3" />
+    <Property Name="TongTien" Type="Double" />
+    <Property Name="IdKH" Type="Int32" />
+    <Property Name="DiaChiGiao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TinhTrang" Type="Int32" />
   </EntityType>
 </Schema>

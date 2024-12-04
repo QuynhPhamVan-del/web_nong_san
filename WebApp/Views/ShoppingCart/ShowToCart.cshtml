@@ -1,0 +1,96 @@
+﻿@model WebApp.Models.Cart
+@using WebApp.Models
+@{
+    ViewBag.Title = "ShowToCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Cart cart = Session["Cart"] as Cart;
+    int count = 0;
+    if (cart != null)
+    {
+        count = cart.Items.Count();
+    }
+    var thongtin = ViewData["thongtin"] as List<ThongTin>;
+    double tong = 0;
+    var user = Session["user"] as ThongTin;
+}
+<div class="app-wrapper flex-column flex-row-fluid pt-1">
+
+    <div class="container d-flex flex-column p-5">
+        <div class="d-flex container mt-3 flex-column">
+            <h3 class="fs-2" style="color: #093D09">Giỏ hàng</h3>
+            @*<div class="d-flex ms-5 mt-3 ">
+                <i class="fa-solid fa-circle mt-2" style="color: #093D09 "></i>
+                <div class="d-flex flex-column ms-3">
+                    <p class="fs-4 fw-bold" style="color: #093D09">@user.SDT</p>
+                    <p class="fs-4 text-gray-700">@user.DiaChi</p>
+                </div>
+                <button class="btn mt-0 mb-auto me-0 ms-auto">Chỉnh sửa</button>
+            </div>*@
+
+            <div class="d-flex mb-5">
+                <div class="flex-column flex-grow-1">
+                    <p class="fs-4 m-0 p-2" style="background: #DBE9DB">Sản phẩm</p>
+                </div>
+                <div class="flex-column w-200px d-none d-lg-flex">
+                    <p class="fs-4 m-0 p-2 text-center" style="background: #DBE9DB">Đơn giá</p>
+                </div>
+                <div class="flex-column w-200px d-none d-lg-flex">
+                    <p class="fs-4 m-0 p-2 text-center" style="background: #DBE9DB">Khối lượng</p>
+                </div>
+                <div class="flex-column w-200px d-none d-lg-flex">
+                    <p class="fs-4 m-0 p-2 text-center" style="background: #DBE9DB">Thành tiền</p>
+                </div>
+            </div>
+            @foreach (var item in Model.Items)
+            {
+                <div class="d-flex">
+
+                    <div class="flex-column flex-grow-1">
+                        <div class="d-flex">
+                            <p class="fs-4 fw-bold">@thongtin.FirstOrDefault(g=>g.IdTK==item.product.IdTK).HoTen</p>
+                            <p class="fs-4 ms-5 text-gray-700">@thongtin.FirstOrDefault(g => g.IdTK == item.product.IdTK).DiaChi</p>
+                        </div>
+                        <div class="d-flex">
+                            @*<input type="checkbox" />*@
+                            <img class="rounded w-100px h-100px w-lg-70px h-lg-70px" src="~/Upload/SanPham/@item.product.HinhAnh" alt="">
+                            <p class="fs-4 fw-bold m-0 my-auto ps-5 d-none d-lg-flex">@item.product.TenSP</p>
+                            <div class="d-flex d-lg-none flex-column ms-5 ">
+                            <p class="fs-4 fw-bold m-0">Ổi hoành bồ</p>
+                            <p class="fs-4 m-0 fw-bold">Đơn giá: @conver.ConvertToThousand64_From_Float(item.product.GiaTien*(100-item.product.GiamGia)/100)đ</p>
+                            <p class="fs-4 m-0 fw-bold">Số lượng: @item.Quantity</p>
+                            <p class="fs-4 m-0 fw-bold">Tổng: @(item.Quantity* item.product.GiaTien * (100 - item.product.GiamGia) / 100)</p>
+                        </div>
+
+                        </div>
+
+                    </div>
+                    <div class="flex-column w-200px h-100 d-flex border-end border-dark d-none d-lg-flex">
+                    <p class="fs-4 m-0 p-2 my-auto fw-bold text-center">@conver.ConvertToThousand64_From_Float(item.product.GiaTien * (100 - item.product.GiamGia) / 100)đ</p>
+                </div>
+                <div class="flex-column w-200px h-100 d-flex border-end border-dark d-none d-lg-flex">
+                    <p class="fs-4 m-0 p-2 my-auto fw-bold text-center">@item.Quantity</p>
+                </div>
+                <div class="flex-column w-200px h-100 d-flex d-none d-lg-flex">
+                    <p class="fs-4 m-0 p-2 my-auto fw-bold text-center">@conver.ConvertToThousand64_From_Float(item.Quantity* item.product.GiaTien * (100 - item.product.GiamGia) / 100) đ</p>
+                </div>
+
+                </div>
+                tong +=Convert.ToDouble(item.Quantity * item.product.GiaTien * (100 - item.product.GiamGia) / 100);
+            }
+
+
+            <div class="w-100 border-bottom border-dark my-5"></div>
+            <div class="d-flex justify-content-end">
+                <div class="d-flex flex-column">
+                    <p class="fs-4 mb-1">Tổng tiền hàng (@count sản phẩm) :  @conver.ConvertToThousand64_From_Float(tong)đ</p>
+                    <p class="fs-4 mb-1">Tổng tiền phí vận chuyển: 18.000 đ</p>
+                    <p class="fs-4 fw-bold mb-1">Tổng thanh toán: @conver.ConvertToThousand64_From_Float(tong+18000)đ</p>
+                </div>
+            </div>
+
+            <a href="/ShoppingCart/ThanhToan" class="btn me-0 ms-auto text-white mt-5" style="background: #1B891D">Thanh toán</a>
+
+        </div>
+    </div>
+
+</div>

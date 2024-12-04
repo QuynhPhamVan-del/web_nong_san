@@ -266,5 +266,70 @@ namespace WebApp.Controllers
                 return Json(new { status = true, message = "Lỗi dữ liệu" }, JsonRequestBehavior.AllowGet);
             }
         }
+        public ActionResult DanhSachSanPham(int? page,int IdDiaPhuong=0,int IdLoai=0,int IdLoc=0)
+        {
+            ViewData["diaphuong"] = db.DiaPhuong.ToList();
+            ViewData["loai"] = db.LoaiSanPham.ToList();
+            var list = db.SanPham.Where(g => g.TinhTrang == true).ToList();
+            ViewBag.IdDiaPhuong = IdDiaPhuong;
+            ViewBag.IdLoai = IdLoai;
+            ViewBag.IdLoc = IdLoc;
+            if (IdDiaPhuong > 0)
+            {
+                list=list.Where(g=>g.IdDiaPhuong==IdDiaPhuong).ToList();
+            }
+            if(IdLoai > 0)
+            {
+                list = list.Where(g => g.IdLoai == IdLoai).ToList();
+            }
+            var books = list.OrderByDescending(g => g.NgayDang);
+            if (IdLoc == 1)
+            {
+                books = books.OrderBy(g => g.TenSP);
+            }
+            if (IdLoc == 2)
+            {
+                books = books.OrderBy(g => g.GiaTien);
+            }
+            if (IdLoc == 3)
+            {
+                books = books.OrderByDescending(g => g.GiaTien);
+            }
+            if (IdLoc == 4)
+            {
+                books = books.OrderBy(g => g.NgayDang);
+            }
+            if (page == null) page = 1;
+            int pageSize = 15;
+            int pageNumber = (page ?? 1);
+            ViewBag.pageNumber = page;
+            ViewBag.total = list.ToList().Count();
+            return View(books.ToPagedList(pageNumber, pageSize));
+        }
+        public ActionResult ChitietSanPham(int? Id)
+        {
+            ViewData["thongtin"] = db.ThongTin.ToList();
+            var chitiet = db.SanPham.Find(Id);
+            ViewData["sanpham"] = db.SanPham.Where(g => g.IdDiaPhuong == chitiet.IdDiaPhuong).ToList();
+
+            return View(chitiet);
+        }
+
+        public ActionResult QuanLyDonHang(int? page)
+        {
+            var user = Session["user"] as ThongTin ;
+            var listCT = db.ChiTietDonHang.Where(g => g.IdCuaHang == user.IdTK).ToList();
+            ViewData["ct"] = listCT;
+            ViewData["sp"] = db.SanPham.ToList();
+            var lstDH = listCT.Select(g =>(int?)g.IdDH).ToList();
+            var list = db.DonHang.Where(g => lstDH.Contains(g.Id)).ToList();
+            if (page == null) page = 1;
+            var books = list.OrderBy(g => g.NgayDatHang);
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            ViewBag.pageNumber = page;
+            ViewBag.total = list.ToList().Count();
+            return View(books.ToPagedList(pageNumber, pageSize));
+        }
     }
 }

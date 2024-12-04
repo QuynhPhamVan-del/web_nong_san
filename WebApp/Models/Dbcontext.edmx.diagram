@@ -13,6 +13,8 @@
         <EntityTypeShape EntityType="Web_Nong_SanModel.DanhGia" Width="1.5" PointX="3.375" PointY="7.75" />
         <EntityTypeShape EntityType="Web_Nong_SanModel.ThongTin" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="Web_Nong_SanModel.SanPham" Width="1.5" PointX="7.375" PointY="5.75" />
+        <EntityTypeShape EntityType="Web_Nong_SanModel.ChiTietDonHang" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Web_Nong_SanModel.DonHang" Width="1.5" PointX="0.75" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

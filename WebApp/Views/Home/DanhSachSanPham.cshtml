@@ -1,0 +1,289 @@
+﻿@model PagedList.IPagedList<WebApp.Models.SanPham>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "DanhSachSanPham";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var diaphuong = ViewData["diaphuong"] as List<WebApp.Models.DiaPhuong>;
+    var loai = ViewData["loai"] as List<WebApp.Models.LoaiSanPham>;
+    var uesr = Session["user"] as WebApp.Models.ThongTin;
+    var check = 0;
+    check = uesr == null ? 1 : 0;
+    <style>
+        .active1 {
+        background-color: #696cff;
+            color: #fff;
+            border: none;
+    }
+    </style>
+    var tieude = "";
+    if (ViewBag.IdDiaPhuong > 0)
+    {
+        tieude = "Danh sách sản phẩm thuộc " + diaphuong.FirstOrDefault(g => g.Id == ViewBag.IdDiaPhuong).TenDiaPhuong;
+    }
+    if (ViewBag.IdLoai > 0)
+    {
+        tieude=   "Danh sách sản phẩm loại " + loai.FirstOrDefault(g => g.Id == ViewBag.IdLoai).TenLoaiSP;
+    }
+    if (ViewBag.IdLoai > 0 && ViewBag.IdDiaPhuong > 0)
+    {
+        tieude = "Danh sách sản phẩm " + loai.FirstOrDefault(g => g.Id == ViewBag.IdLoai).TenLoaiSP + " thuộc " + diaphuong.FirstOrDefault(g => g.Id == ViewBag.IdDiaPhuong).TenDiaPhuong;
+    }
+    if (ViewBag.IdLoai == 0 && ViewBag.IdDiaPhuong == 0)
+    {
+        tieude = "Danh sách sản phẩm ";
+    }
+}
+
+<div class="app-wrapper flex-column flex-row-fluid pt-1">
+
+    <div class="container d-flex flex-column p-5">
+        <div id="kt_app_content" class="app-content mt-5 container">
+            <!--begin::Inbox App - Compose -->
+            <div class="d-flex flex-column flex-lg-row">
+
+                <!--begin::Sidebar-->
+                <div class="d-none d-lg-flex flex-column flex-lg-row-auto col-12 col-lg-2" data-kt-drawer="true"
+                     data-kt-drawer-name="inbox-aside" data-kt-drawer-activate="{default: true, lg: false}"
+                     data-kt-drawer-overlay="true" data-kt-drawer-width="225px" data-kt-drawer-direction="start"
+                     data-kt-drawer-toggle="#kt_inbox_aside_toggle">
+                    <!--begin::Sticky aside-->
+                    <div class="mt-lg-0" data-kt-sticky="false" style="margin-top: 40px"
+                         data-kt-sticky-name="inbox-aside-sticky" data-kt-sticky-offset="{default: false, xl: '100px'}"
+                         data-kt-sticky-width="{lg: '275px'}" data-kt-sticky-left="auto" data-kt-sticky-top="100px"
+                         data-kt-sticky-animation="false" data-kt-sticky-zindex="95">
+                        <!--begin::Aside content-->
+                        <div class="p-1">
+                            <!--begin::Menu-->
+                            <div class="menu menu-column menu-rounded menu-state-bg menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary mb-10">
+                                <!--begin::Menu item-->
+                                <div class="menu-item mb-3 d-flex flex-column">
+                                    <div class="d-flex rounded w-100 p-3" style="background: #5C7E5B">
+                                        <p class="fw-bold fs-5 m-0 text-white">Địa phương</p>
+                                    </div>
+                                    <select data-control="select2" id="IdDiaPhuong" onchange="timkiem()" class="mt-5 w-100 form-select form-select">
+                                        <option value="0" selected>Tất cả</option>
+                                        @foreach (var item in diaphuong)
+                                        {
+                                            <option value="@item.Id" @(ViewBag.IdDiaPhuong==item.Id?"selected":"")>@item.TenDiaPhuong</option>
+                                        }
+                                    </select>
+                                    <div class="d-flex rounded w-100 p-3 mt-5" style="background: #5C7E5B">
+                                        <p class="fw-bold fs-5 m-0 text-white">Loại sản phẩm</p>
+                                    </div>
+                                    <select data-control="select2"  class="mt-5 w-100 form-select form-select" id="IdLoai" onchange="timkiem()">
+                                        <option value="0" selected>Tất cả</option>
+                                        @foreach (var item in loai)
+                                        {
+                                            <option value="@item.Id" @(ViewBag.IdLoai==item.Id?"selected":"")>@item.TenLoaiSP</option>
+                                        }
+                                    </select>
+
+                                    <div class="d-flex rounded w-100 p-3 mt-5" style="background: #5C7E5B">
+                                        <p class="fw-bold fs-5 m-0 text-white">Giá</p>
+                                    </div>
+                                    <div class="d-flex justify-content-around mt-5 d-flex">
+                                        <input type="text" name="name"
+                                               class="form-control form-control-lg form-control mb-3 mb-lg-0"
+                                               placeholder="Từ" value="" />
+                                        <p class="fs-4 my-auto">-</p>
+                                        <input type="text" name="name"
+                                               class="form-control form-control-lg form-control mb-3 mb-lg-0"
+                                               placeholder="Đến" value="" />
+                                    </div>
+
+
+                                </div>
+                      
+                            </div>
+
+                            <!--end::Menu-->
+                        </div>
+                        <!--end::Aside content-->
+                    </div>
+                    <!--end::Sticky aside-->
+                </div>
+                <!--end::Sidebar-->
+
+                <div class="d-flex flex-column col-12 col-lg-10">
+                    <!--begin::Card-->
+                    <div class="d-flex w-100 flex-column">
+                        <div class="w-100 d-flex align-items-center justify-content-between py-3 mb-5">
+                            <!--begin::Toggle--
+                            <!--end::Toggle-->
+                            <h1>@tieude</h1>
+                            <div>
+                                <select data-control="select2" data-placeholder="Sắp xếp theo" class="w-200px form-select form-select" id="IdLoc" onchange="timkiem()">
+                                    <option value="0" @(ViewBag.IdLoc==0?"selected":"")>Tất cả</option>
+                                    <option value="1"  @(ViewBag.IdLoc==1?"selected":"")>Từ A -> Z</option>
+                                    <option value="2"  @(ViewBag.IdLoc==2?"selected":"")>Thấp đến cao</option>
+                                    <option value="3"  @(ViewBag.IdLoc==3?"selected":"")>Cao đến thấp</option>
+                                    <option value="4"  @(ViewBag.IdLoc==4?"selected":"")>Mới đến cũ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body p-0 d-flex flex-wrap">
+                            @foreach (var i in Model)
+                            {
+                                <div class="px-2 px-md-5 pt-0 pb-2 col-6 col-md-4 col-lg-3">
+                                    <div class="card d-flex  rouder border border-3">
+                                        <a href="#">
+                                            <img class="rounded-top w-100"
+                                                 src="~/Upload/SanPham/@i.HinhAnh"
+                                                 alt="">
+                                        </a>
+                                        <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                            <a href="/Home/ChiTietSP?Id=@i.Id" class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                                @i.TenSP
+                                            </a>
+                                            <a href="#" class="rating justify-content-start text-gray-700 fs-6">
+
+                                                <div class="rating-label checked">
+                                                    <i class="fa fa-star fs-5"></i>
+                                                </div>
+                                                <div class="rating-label checked">
+                                                    <i class="fa fa-star fs-5"></i>
+                                                </div>
+                                                <div class="rating-label checked">
+                                                    <i class="fa fa-star fs-5"></i>
+                                                </div>
+                                                <div class="rating-label checked">
+                                                    <i class="fa fa-star fs-5"></i>
+                                                </div>
+
+                                                <div class="rating-label checked">
+                                                    <i class="fa fa-star-half-alt fs-5"></i>
+                                                </div>
+
+                                                (8)
+                                            </a>
+                                            <p class="fs-6 m-0 text-gray-700">Đã bán @i.SoLuongBan sản phẩm</p>
+
+                                            <div class="d-flex justify-content-between">
+                                                @if (i.GiamGia == 0)
+                                                {
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <div class="h-20px"></div>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">@WebApp.Models.conver.ConvertToThousand64_From_Float(i.GiaTien) đ</p>
+                                                        </div>
+
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="#" class="d-flex flex-column">
+                                                        <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                            @WebApp.Models.conver.ConvertToThousand64_From_Float(i.GiaTien) đ
+                                                        </p>
+                                                        <div class="d-flex">
+                                                            <p class="mb-0 mt-0 fw-bold fs-4">@WebApp.Models.conver.ConvertToThousand64_From_Float((i.GiaTien * (100 - i.GiamGia) / 100)) đ</p>
+                                                            <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                                (-@i.GiamGia%)
+                                                            </p>
+                                                        </div>
+
+                                                    </a>
+                                                }
+                                                <div class="d-none d-md-flex">
+
+
+                                                    <i data-url="#"
+                                                       class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                    <a onclick="check(@i.Id,@check)">
+                                                        <img class="w-30px mt-0 cursor-pointer card_product"
+                                                             src="~/assets/media/custom/icon_basket.svg" alt="">
+                                                    </a> 
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex d-md-none justify-content-around">
+
+
+                                                <i data-url="#"
+                                                   class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                <img class="w-25px mt-0 cursor-pointer card_product"
+                                                     src="~/assets/media/custom/icon_basket.svg" alt="">
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            }
+
+                        </div>
+                        <div>
+                            <div class="col-md-12" style="text-align:right;color:black">
+                                Tổng số sản phẩm: @ViewBag.total &nbsp;
+                            </div>
+                            <ul class="pagination" style="float:right;margin-right:20px">
+
+                                @for (int i = 1; i <= Model.PageCount; i++)
+                                {
+                                    <li>
+                                        <a class="page-link @(Convert.ToInt32(ViewBag.pageNumber)==i?"active1":"")" href="@Url.Action("DanhSachSanPham", new { page = i,IdDiaPhuong=ViewBag.IdDiaPhuong,IdLoai=ViewBag.IdLoai })">@i</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <!--end::Card-->
+                </div>
+            </div>
+            <!--end::Inbox App - Compose -->
+        </div>
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        function timkiem() {
+            var IdDiaPhuong = $('#IdDiaPhuong').val();
+            var IdLoai = $('#IdLoai').val();
+            var IdLoc = $('#IdLoc').val();
+            window.location.href = "/Home/DanhSachSanPham?IdLoai=" + IdLoai + "&IdDiaPhuong=" + IdDiaPhuong + "&IdLoc=" + IdLoc;
+        }
+        function check(Id, check) {
+            if (check == 1) {
+                Swal.fire({
+                    title: "Bạn đã có tài khoản ?",
+                    text: "Bạn hãy đăng nhập để đặt hàng.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Đăng nhập",
+                    cancelButtonText: "hủy bỏ",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Home/Login";
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: "/ShoppingCart/AddtoCart",
+                    method: 'GET',
+                    data: {
+                        id: Id
+                    },
+                    success: function (response) {
+                        if (response.status == true) {
+                            Swal.fire({
+                                position: "center-center",
+                                icon: "success",
+                                title: response.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            $('#myParagraph').html(response.dem);
+                            $('.notification').css('display', 'block');
+                        }
+                    },
+                });
+            }
+        }
+    </script>
+    }

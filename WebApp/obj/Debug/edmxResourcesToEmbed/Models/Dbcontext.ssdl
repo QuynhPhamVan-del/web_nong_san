@@ -10,6 +10,17 @@
     <Property Name="ThuTu" Type="int" />
     <Property Name="IsDelete" Type="bit" />
   </EntityType>
+  <EntityType Name="ChiTietDonHang">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdDH" Type="int" />
+    <Property Name="IdSP" Type="int" />
+    <Property Name="SoLuongMua" Type="int" />
+    <Property Name="GiaTien" Type="float" />
+    <Property Name="IdCuaHang" Type="int" />
+  </EntityType>
   <EntityType Name="DanhGia">
     <Key>
       <PropertyRef Name="Id" />
@@ -27,6 +38,18 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenDiaPhuong" Type="nvarchar" MaxLength="200" />
     <Property Name="HinhAnh" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="DonHang">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NgayDatHang" Type="datetime" />
+    <Property Name="TongTien" Type="float" />
+    <Property Name="IdKH" Type="int" />
+    <Property Name="DiaChiGiao" Type="nvarchar(max)" />
+    <Property Name="SDT" Type="nvarchar" MaxLength="50" />
+    <Property Name="TinhTrang" Type="int" />
   </EntityType>
   <EntityType Name="LoaiSanPham">
     <Key>
@@ -92,8 +115,10 @@
   </EntityType>
   <EntityContainer Name="Web_Nong_SanModelStoreContainer">
     <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChiTietDonHang" EntityType="Self.ChiTietDonHang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DanhGia" EntityType="Self.DanhGia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DiaPhuong" EntityType="Self.DiaPhuong" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DonHang" EntityType="Self.DonHang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LoaiSanPham" EntityType="Self.LoaiSanPham" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />

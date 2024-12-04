@@ -15,6 +15,17 @@
           <Property Name="ThuTu" Type="int" />
           <Property Name="IsDelete" Type="bit" />
         </EntityType>
+        <EntityType Name="ChiTietDonHang">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDH" Type="int" />
+          <Property Name="IdSP" Type="int" />
+          <Property Name="SoLuongMua" Type="int" />
+          <Property Name="GiaTien" Type="float" />
+          <Property Name="IdCuaHang" Type="int" />
+        </EntityType>
         <EntityType Name="DanhGia">
           <Key>
             <PropertyRef Name="Id" />
@@ -32,6 +43,18 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TenDiaPhuong" Type="nvarchar" MaxLength="200" />
           <Property Name="HinhAnh" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DonHang">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgayDatHang" Type="datetime" />
+          <Property Name="TongTien" Type="float" />
+          <Property Name="IdKH" Type="int" />
+          <Property Name="DiaChiGiao" Type="nvarchar(max)" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="50" />
+          <Property Name="TinhTrang" Type="int" />
         </EntityType>
         <EntityType Name="LoaiSanPham">
           <Key>
@@ -97,8 +120,10 @@
         </EntityType>
         <EntityContainer Name="Web_Nong_SanModelStoreContainer">
           <EntitySet Name="Banner" EntityType="Self.Banner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChiTietDonHang" EntityType="Self.ChiTietDonHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DanhGia" EntityType="Self.DanhGia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiaPhuong" EntityType="Self.DiaPhuong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DonHang" EntityType="Self.DonHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoaiSanPham" EntityType="Self.LoaiSanPham" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
@@ -155,6 +180,8 @@
           <EntitySet Name="DanhGia" EntityType="Web_Nong_SanModel.DanhGia" />
           <EntitySet Name="ThongTin" EntityType="Web_Nong_SanModel.ThongTin" />
           <EntitySet Name="SanPham" EntityType="Web_Nong_SanModel.SanPham" />
+          <EntitySet Name="ChiTietDonHang" EntityType="Web_Nong_SanModel.ChiTietDonHang" />
+          <EntitySet Name="DonHang" EntityType="Web_Nong_SanModel.DonHang" />
         </EntityContainer>
         <EntityType Name="LoaiSanPham">
           <Key>
@@ -208,6 +235,29 @@
           <Property Name="GiamGia" Type="Int32" />
           <Property Name="SoLuongBan" Type="Int32" />
           <Property Name="IdLoai" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ChiTietDonHang">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDH" Type="Int32" />
+          <Property Name="IdSP" Type="Int32" />
+          <Property Name="SoLuongMua" Type="Int32" />
+          <Property Name="GiaTien" Type="Double" />
+          <Property Name="IdCuaHang" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DonHang">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayDatHang" Type="DateTime" Precision="3" />
+          <Property Name="TongTien" Type="Double" />
+          <Property Name="IdKH" Type="Int32" />
+          <Property Name="DiaChiGiao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TinhTrang" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -309,6 +359,31 @@
                 <ScalarProperty Name="GiaTien" ColumnName="GiaTien" />
                 <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
                 <ScalarProperty Name="TenSP" ColumnName="TenSP" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChiTietDonHang">
+            <EntityTypeMapping TypeName="Web_Nong_SanModel.ChiTietDonHang">
+              <MappingFragment StoreEntitySet="ChiTietDonHang">
+                <ScalarProperty Name="IdCuaHang" ColumnName="IdCuaHang" />
+                <ScalarProperty Name="GiaTien" ColumnName="GiaTien" />
+                <ScalarProperty Name="SoLuongMua" ColumnName="SoLuongMua" />
+                <ScalarProperty Name="IdSP" ColumnName="IdSP" />
+                <ScalarProperty Name="IdDH" ColumnName="IdDH" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DonHang">
+            <EntityTypeMapping TypeName="Web_Nong_SanModel.DonHang">
+              <MappingFragment StoreEntitySet="DonHang">
+                <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="DiaChiGiao" ColumnName="DiaChiGiao" />
+                <ScalarProperty Name="IdKH" ColumnName="IdKH" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="NgayDatHang" ColumnName="NgayDatHang" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

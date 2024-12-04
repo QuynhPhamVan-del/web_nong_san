@@ -1,0 +1,131 @@
+/* Reset các thuộc tính mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Cấu trúc tổng thể */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+    display: flex;
+}
+
+/* Menu bên trái */
+.menu {
+    width: 250px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: fixed; /* Giữ menu cố định khi cuộn trang */
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.menu input[type="radio"] {
+    display: none;
+}
+
+.menu label {
+    cursor: pointer;
+    font-size: 18px;
+    display: block;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.menu input[type="radio"]:checked + label {
+    font-weight: bold;
+    background-color: #555; /* Đổi màu khi chọn */
+}
+
+.menu input[type="radio"]:not(:checked) + label:hover {
+    background-color: #444; /* Màu nền khi hover */
+}
+
+.main-content {
+    flex: 1;
+    margin-left: 270px; /* Đảm bảo nội dung không bị che bởi menu */
+    padding: 20px;
+}
+
+header {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+/* Các nút, form, và phần tử trong nội dung chính */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.input-group input, .input-group select, .input-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-group textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.cancel-btn {
+    background-color: #ccc;
+}
+
+.save-btn {
+    background-color: #5cb85c;
+    color: white;
+}
+
+.save-display-btn {
+    background-color: #007bff;
+    color: white;
+}
