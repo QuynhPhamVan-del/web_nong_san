@@ -126,9 +126,9 @@
                         <p class="fs-4 text-nowrap my-auto pe-4">
                             Số lượng
                         </p>
-                        <input type="text" name="name"
-                               class="h-25px w-200px me-5 my-auto py-1 form-control form-control-sm mb-3 mb-lg-0 rounded-0"
-                               style="border-color: #1B891D" value="" id="soluong">
+                        <input type="number" name="name"
+                               class="h-25px w-100px me-5 my-auto py-1 form-control form-control-sm mb-3 mb-lg-0 rounded-0"
+                               style="border-color: #1B891D" value="" id="soluong" min="0">
                     </div>
                 </div>
 
@@ -271,7 +271,7 @@
 </div>
 @section scripts{
     <script>
-        function check(Id, check) {
+        function themgiohang(Id, check) {
             if (check == 1) {
                 Swal.fire({
                     title: "Bạn đã có tài khoản ?",

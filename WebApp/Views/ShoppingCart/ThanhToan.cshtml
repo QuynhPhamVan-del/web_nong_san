@@ -47,7 +47,7 @@
                                 @foreach (var item in cart.Items)
                                 {
                                     <tr>
-                                        <td><img src="~/Upload/SanPham/@item.product.HinhAnh" alt="Ói Hoành Bồ" width="50">@item.product.TenSP - @thongtin.FirstOrDefault(g=>g.IdTK==item.product.IdTK).HoTen</td>
+                                        <td><img src="~/Upload/SanPham/@item.product.HinhAnh.Split(',')[0]" alt="Ói Hoành Bồ" width="50">@item.product.TenSP - @thongtin.FirstOrDefault(g=>g.IdTK==item.product.IdTK).HoTen</td>
                                         <td>@conver.ConvertToThousand64_From_Float(item.product.GiaTien*(100-item.product.GiamGia)/100) VND</td>
                                         <td>@item.Quantity</td>
                                         <td>@conver.ConvertToThousand64_From_Float(item.Quantity*item.product.GiaTien * (100 - item.product.GiamGia) / 100) VND</td>
