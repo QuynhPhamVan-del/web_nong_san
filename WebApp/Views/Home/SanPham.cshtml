@@ -97,7 +97,7 @@
 
 
                                             <td>
-                                                <img src="~/Upload/SanPham/@item.HinhAnh" width="80" />
+                                                <img src="~/Upload/SanPham/@item.HinhAnh.Split(',')[0]" width="80" />
                                             </td>
                                             <td>@WebApp.Models.conver.ConvertToThousand64_From_Float(item.GiaTien) VNĐ</td>
                                             <td>@item.NgayDang.Value.ToString("dd/MM/yyyy")</td>

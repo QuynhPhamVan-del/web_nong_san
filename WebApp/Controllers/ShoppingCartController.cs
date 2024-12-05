@@ -36,6 +36,19 @@ namespace WebApp.Controllers
             var check = (string)Session["check"] ?? "";
             return Json(new { status = true, message = "Thêm giỏ hàng thành công",dem=dem }, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult AddtoCartSau(int id,int soluong=1)
+        {
+            var dem = 0;
+            var pro = _db.SanPham.FirstOrDefault(s => s.Id == id);
+            if (pro != null)
+            {
+                GetCart().Add(pro,soluong);
+                Cart cart = Session["Cart"] as Cart;
+                dem = cart.Items.Count();
+            }
+            var check = (string)Session["check"] ?? "";
+            return Json(new { status = true, message = "Thêm giỏ hàng thành công", dem = dem }, JsonRequestBehavior.AllowGet);
+        }
         //trang gio hang
         public ActionResult ShowToCart()
         {

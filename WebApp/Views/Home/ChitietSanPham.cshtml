@@ -4,6 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var thongtin = ViewData["thongtin"] as List<WebApp.Models.ThongTin>;
     var sp = ViewData["sanpham"] as List<WebApp.Models.SanPham>;
+    var uesr = Session["user"] as WebApp.Models.ThongTin;
+    var check = 0;
+    check = uesr == null ? 1 : 0;
 }
 
 <div class="app-wrapper flex-column flex-row-fluid pt-1">
@@ -15,20 +18,28 @@
                     <swiper-container class="w-100 h-100"
                                       style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff;" class="mySwiper"
                                       thumbs-swiper=".mySwiper2" loop="true" space-between="10" navigation="true">
-                        <swiper-slide>
-                            <img src="~/Upload/SanPham/@Model.HinhAnh" style="aspect-ratio: 1 / 1;width:100%"/>
-                        </swiper-slide>
-               
+                        @for (int item = 0; item < Model.HinhAnh.Split(',').Count(); item++)
+                        {
+                            <swiper-slide>
+                                <img src="~/Upload/SanPham/@Model.HinhAnh.Split(',')[item]" style="width:100%" />
+                            </swiper-slide>
+                        }
+
                     </swiper-container>
                 </div>
-
-
-                @*<swiper-container class="mySwiper2 w-500px h-100px" loop="true" space-between="10" slides-per-view="4"
+                <swiper-container class="mySwiper2 w-500px h-100px" loop="true" space-between="10" slides-per-view="4"
                                   free-mode="true" watch-slides-progress="true">
-                    <swiper-slide>
-                        <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                    </swiper-slide>
-                    <swiper-slide>
+                    @for (int item = 0; item < Model.HinhAnh.Split(',').Count(); item++)
+                    {
+                        <swiper-slide>
+                            <img src="~/Upload/SanPham/@Model.HinhAnh.Split(',')[item]" style="width:100%" />
+                        </swiper-slide>
+                    }
+
+                </swiper-container>
+
+
+                @*<swiper-slide>
                         <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
                     </swiper-slide>
                     <swiper-slide>
@@ -36,8 +47,7 @@
                     </swiper-slide>
                     <swiper-slide>
                         <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                    </swiper-slide>
-                </swiper-container>*@
+                    </swiper-slide>*@
             </div>
 
             <div class="d-flex flex-column ps-20 flex-grow-1">
@@ -88,7 +98,7 @@
 
                     <div class="d-flex">
                         <p class="fs-4 fw-bold me-3">Người bán:</p>
-                        <p class="fs-4 fw-bold me-3" style="color: #1A5319"> @thongtin.FirstOrDefault(g=>g.IdTK==Model.IdTK).HoTen</p>
+                        <p class="fs-4 fw-bold me-3" style="color: #1A5319"> @thongtin.FirstOrDefault(g => g.IdTK == Model.IdTK).HoTen</p>
                     </div>
                 </div>
 
@@ -118,31 +128,31 @@
                         </p>
                         <input type="text" name="name"
                                class="h-25px w-200px me-5 my-auto py-1 form-control form-control-sm mb-3 mb-lg-0 rounded-0"
-                               style="border-color: #1B891D" value="">
+                               style="border-color: #1B891D" value="" id="soluong">
                     </div>
                 </div>
 
                 <div class="d-flex mt-4 flex-grow-1 justify-content-end">
-                    <a class="btn ms-auto my-auto me-5" style="border: 1px solid #1B891D;">
+                    <a onclick="themgiohang(@Model.Id)" class="btn ms-auto my-auto me-5" style="border: 1px solid #1B891D;">
                         <i class="fa-solid fa-cart-shopping fs-1" style="color:#1B891D "></i>
                     </a>
 
-                    <button class="btn my-auto" style="border: 1px solid #1B891D; color: #1B891D">Thanh toán</button>
+                    <a href="/ShoppingCart/ThanhToan" class="btn my-auto" style="border: 1px solid #1B891D; color: #1B891D">Thanh toán</a>
                 </div>
             </div>
 
             <div class="w-100 d-flex flex-column">
                 @*<p class="d-flex py-2 px-5 bg-gray-300 mt-5 w-100 fs-2 fw-bold" style="color: #1A5319">
-                    CHI TIẾT SẢN PHẨM
-                </p>
-                <p class="fs-4 ms-20">Kho: 12kg</p>
-                <p class="fs-4 ms-20">Gửi từ: Hoành Bồ, Hạ Long, Quảng Ninh</p>*@
+                        CHI TIẾT SẢN PHẨM
+                    </p>
+                    <p class="fs-4 ms-20">Kho: 12kg</p>
+                    <p class="fs-4 ms-20">Gửi từ: Hoành Bồ, Hạ Long, Quảng Ninh</p>*@
 
                 <p class="d-flex py-2 px-5 bg-gray-300 mt-5 w-100 fs-2 fw-bold" style="color: #1A5319">
                     MÔ TẢ SẢN PHẨM
                 </p>
 
-               @Html.Raw(Model.MoTa)
+                @Html.Raw(Model.MoTa)
 
                 <div class="container rounded shadow-sm bg-white px-0 mt-5">
                     <div class="card-header border-0 d-flex justify-content-between">
@@ -154,7 +164,7 @@
                         <div class="card-right p-5 my-auto d-flex">
                             <a href="/Home/DanhSachSanPham?IdDiaPhuong=@Model.IdDiaPhuong" class="fs-5 d-flex">
                                 Xem tất cả
-                      
+
 
                                 <img src="~/assets/media/custom/icon_to_right.svg" />
                             </a>
@@ -164,90 +174,90 @@
                     <div class="p-2 p-md-5 border-top d-flex flex-wrap">
                         @foreach (var i in sp.Take(6))
                         {
-                        <div class="px-2 px-md-5 pt-0 pb-2 col-6 col-md-4 col-lg-3">
-                            <div class="card d-flex  rouder border border-3">
-                                <a href="#">
-                                    <img class="rounded-top w-100"
-                                         src="~/Upload/SanPham/@i.HinhAnh"
-                                         alt="">
-                                </a>
-                                <div class="px-2 px-md-5 pb-5 d-flex flex-column">
-                                    <a href="/Home/ChiTietSanPham?Id=@i.Id" class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
-                                        @i.TenSP
+                            <div class="px-2 px-md-5 pt-0 pb-2 col-6 col-md-4 col-lg-3">
+                                <div class="card d-flex  rouder border border-3">
+                                    <a href="#">
+                                        <img class="rounded-top w-100"
+                                             src="~/Upload/SanPham/@i.HinhAnh"
+                                             alt="">
                                     </a>
-                                    <a href="#" class="rating justify-content-start text-gray-700 fs-6">
+                                    <div class="px-2 px-md-5 pb-5 d-flex flex-column">
+                                        <a href="/Home/ChiTietSanPham?Id=@i.Id" class="fw-bold fs-4 m-0 pt-4 h-50px text-truncate-2">
+                                            @i.TenSP
+                                        </a>
+                                        <a href="#" class="rating justify-content-start text-gray-700 fs-6">
 
-                                        <div class="rating-label checked">
-                                            <i class="fa fa-star fs-5"></i>
-                                        </div>
-                                        <div class="rating-label checked">
-                                            <i class="fa fa-star fs-5"></i>
-                                        </div>
-                                        <div class="rating-label checked">
-                                            <i class="fa fa-star fs-5"></i>
-                                        </div>
-                                        <div class="rating-label checked">
-                                            <i class="fa fa-star fs-5"></i>
-                                        </div>
+                                            <div class="rating-label checked">
+                                                <i class="fa fa-star fs-5"></i>
+                                            </div>
+                                            <div class="rating-label checked">
+                                                <i class="fa fa-star fs-5"></i>
+                                            </div>
+                                            <div class="rating-label checked">
+                                                <i class="fa fa-star fs-5"></i>
+                                            </div>
+                                            <div class="rating-label checked">
+                                                <i class="fa fa-star fs-5"></i>
+                                            </div>
 
-                                        <div class="rating-label checked">
-                                            <i class="fa fa-star-half-alt fs-5"></i>
-                                        </div>
+                                            <div class="rating-label checked">
+                                                <i class="fa fa-star-half-alt fs-5"></i>
+                                            </div>
 
-                                        (8)
-                                    </a>
-                                    <p class="fs-6 m-0 text-gray-700">Đã bán @i.SoLuongBan sản phẩm</p>
+                                            (8)
+                                        </a>
+                                        <p class="fs-6 m-0 text-gray-700">Đã bán @i.SoLuongBan sản phẩm</p>
 
-                                    <div class="d-flex justify-content-between">
-                                        @if (i.GiamGia == 0)
-                                        {
-                                            <a href="#" class="d-flex flex-column">
-                                                <div class="h-20px"></div>
-                                                <div class="d-flex">
-                                                    <p class="mb-0 mt-0 fw-bold fs-4">@WebApp.Models.conver.ConvertToThousand64_From_Float(i.GiaTien) đ</p>
-                                                </div>
+                                        <div class="d-flex justify-content-between">
+                                            @if (i.GiamGia == 0)
+                                            {
+                                                <a href="#" class="d-flex flex-column">
+                                                    <div class="h-20px"></div>
+                                                    <div class="d-flex">
+                                                        <p class="mb-0 mt-0 fw-bold fs-4">@WebApp.Models.conver.ConvertToThousand64_From_Float(i.GiaTien) đ</p>
+                                                    </div>
 
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <a href="#" class="d-flex flex-column">
-                                                <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
-                                                    @WebApp.Models.conver.ConvertToThousand64_From_Float(i.GiaTien) đ
-                                                </p>
-                                                <div class="d-flex">
-                                                    <p class="mb-0 mt-0 fw-bold fs-4">@WebApp.Models.conver.ConvertToThousand64_From_Float((i.GiaTien * (100 - i.GiamGia) / 100)) đ</p>
-                                                    <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
-                                                        (-@i.GiamGia%)
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" class="d-flex flex-column">
+                                                    <p class="m-0 text-gray-600 text-decoration-line-through fs-6">
+                                                        @WebApp.Models.conver.ConvertToThousand64_From_Float(i.GiaTien) đ
                                                     </p>
-                                                </div>
+                                                    <div class="d-flex">
+                                                        <p class="mb-0 mt-0 fw-bold fs-4">@WebApp.Models.conver.ConvertToThousand64_From_Float((i.GiaTien * (100 - i.GiamGia) / 100)) đ</p>
+                                                        <p class="ms-1 ms-md-3 mb-0 mt-0 text-danger fs-5">
+                                                            (-@i.GiamGia%)
+                                                        </p>
+                                                    </div>
 
-                                            </a>
-                                        }
-                                        <div class="d-none d-md-flex">
+                                                </a>
+                                            }
+                                            <div class="d-none d-md-flex">
+
+
+                                                <i data-url="#"
+                                                   class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                                <img class="w-30px mt-0 cursor-pointer card_product"
+                                                     src="~/assets/media/custom/icon_basket.svg" alt="">
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex d-md-none justify-content-around">
 
 
                                             <i data-url="#"
-                                               class="m-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
-                                            <img class="w-30px mt-0 cursor-pointer card_product"
+                                               class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
+                                            <img class="w-25px mt-0 cursor-pointer card_product"
                                                  src="~/assets/media/custom/icon_basket.svg" alt="">
                                         </div>
-                                    </div>
 
-                                    <div class="d-flex d-md-none justify-content-around">
-
-
-                                        <i data-url="#"
-                                           class="my-auto fa-regular fa-heart fs-1 cursor-pointer heart_product text-black"></i>
-                                        <img class="w-25px mt-0 cursor-pointer card_product"
-                                             src="~/assets/media/custom/icon_basket.svg" alt="">
                                     </div>
 
                                 </div>
 
                             </div>
-
-                        </div>
                         }
                     </div>
                     <!--end::Content-->
@@ -259,3 +269,48 @@
     </div>
 
 </div>
+@section scripts{
+    <script>
+        function check(Id, check) {
+            if (check == 1) {
+                Swal.fire({
+                    title: "Bạn đã có tài khoản ?",
+                    text: "Bạn hãy đăng nhập để đặt hàng.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Đăng nhập",
+                    cancelButtonText: "hủy bỏ",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/Home/Login";
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    url: "/ShoppingCart/AddtoCartSau",
+                    method: 'GET',
+                    data: {
+                        id: Id,
+                        soluong: $('#soluong').val(),
+                    },
+                    success: function (response) {
+                        if (response.status == true) {
+                            Swal.fire({
+                                position: "center-center",
+                                icon: "success",
+                                title: response.message,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            $('#myParagraph').html(response.dem);
+                            $('.notification').css('display', 'block');
+                        }
+                    },
+                });
+            }
+        }
+    </script>
+}

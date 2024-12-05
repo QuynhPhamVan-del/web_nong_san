@@ -59,18 +59,24 @@ namespace WebApp.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult ThemMoi([Bind(Include = "Id,TenSP,GiaTien,MoTa,IdTK,HSD,GiamGia,IdLoai")] SanPham sanpham, HttpPostedFileBase HinhAnh)
+        public ActionResult ThemMoi([Bind(Include = "Id,TenSP,GiaTien,MoTa,IdTK,HSD,GiamGia,IdLoai")] SanPham sanpham, HttpPostedFileBase[] HinhAnh)
         {
             ViewData["loai"] = db.LoaiSanPham.ToList();
             ViewData["diaphuong"] = db.DiaPhuong.ToList();
             try
             {
-                if (HinhAnh != null && HinhAnh.ContentLength > 0)
+                if (HinhAnh != null && HinhAnh.Length > 0)
                 {
-                    var fileName = Path.GetFileName(HinhAnh.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Upload/SanPham"), fileName);
-                    HinhAnh.SaveAs(path);
-                    sanpham.HinhAnh = fileName;
+                    var ten = "";
+                    foreach(var item in HinhAnh)
+                    {
+                        var fileName = Path.GetFileName(item.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Upload/SanPham"), fileName);
+                        item.SaveAs(path);
+                        ten += "," + fileName;
+                    }
+                    ten = ten.TrimStart(',').TrimEnd(',');
+                    sanpham.HinhAnh = ten;
                 }
                 sanpham.NgayDang = DateTime.Now;
                 sanpham.TinhTrang = true;
@@ -94,18 +100,24 @@ namespace WebApp.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Sua([Bind(Include = "Id,TenSP,GiaTien,MoTa,IdTK,HSD,GiamGia,IdLoai,HinhAnh,IdDiaPhuong")] SanPham sanpham, HttpPostedFileBase HinhAnh)
+        public ActionResult Sua([Bind(Include = "Id,TenSP,GiaTien,MoTa,IdTK,HSD,GiamGia,IdLoai,HinhAnh,IdDiaPhuong")] SanPham sanpham, HttpPostedFileBase[] HinhAnh)
         {
             ViewData["loai"] = db.LoaiSanPham.ToList();
             ViewData["diaphuong"] = db.DiaPhuong.ToList();
             try
             {
-                if (HinhAnh != null && HinhAnh.ContentLength > 0)
+                if (HinhAnh != null && HinhAnh.Length > 0)
                 {
-                    var fileName = Path.GetFileName(HinhAnh.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Upload/SanPham"), fileName);
-                    HinhAnh.SaveAs(path);
-                    sanpham.HinhAnh = fileName;
+                    var ten = "";
+                    foreach (var item in HinhAnh)
+                    {
+                        var fileName = Path.GetFileName(item.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Upload/SanPham"), fileName);
+                        item.SaveAs(path);
+                        ten += "," + fileName;
+                    }
+                    ten = ten.TrimStart(',').TrimEnd(',');
+                    sanpham.HinhAnh = ten;
                 }
                 sanpham.NgayDang = DateTime.Now;
                 sanpham.TinhTrang = true;
